@@ -27,4 +27,14 @@ public class UserController {
 	}
 	
 	
+	
+	@RequestMapping(value="findUser1")
+	public ModelAndView findUser1 (Integer integer) {
+		User user = userService.findUserById(1);
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("success");
+		return modelAndView;
+	}
+	
+	
 }
