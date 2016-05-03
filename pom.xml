@@ -180,7 +180,7 @@
   
   
     <build>  
-        <finalName>devbuy_project</finalName>  
+        <finalName>devbuy</finalName>  
         <plugins>  
             <!-- Run the JUnit unit tests in an isolated classloader -->  
             <plugin>  
@@ -208,8 +208,49 @@
                 </configuration>  
             </plugin>  
   
+  <!-- 使用Cargo实现远程部署 -->
+<!-- <plugin>
+    <groupId>org.codehaus.cargo</groupId>
+    <artifactId>cargo-maven2-plugin</artifactId>
+    <version>1.4.15</version>
+    <configuration>
+        <container>
+            <containerId>tomcat8x</containerId>
+            <type>remote</type>
+        </container>
+        <configuration>
+            <type>runtime</type>
+            <properties>
+                <cargo.tomcat.manager.url>http://115.159.150.240/manager</cargo.tomcat.manager.url>
+                <cargo.remote.username>admin</cargo.remote.username>
+                <cargo.remote.password>dev4free</cargo.remote.password>
+                <cargo.servlet.port>80</cargo.servlet.port>
+                <cargo.hostname>115.159.150.240</cargo.hostname>
+                <cargo.tomcat.ajp.port>8009</cargo.tomcat.ajp.port>
+            </properties>
+        </configuration>
+    </configuration>
+</plugin> -->
+  
+  
+  
+  
             <!-- 部署至本机 -->  
-            
+            <!-- <plugin>  
+                <groupId>org.codehaus.cargo</groupId>  
+                <artifactId>cargo-maven2-plugin</artifactId>  
+                <version>1.0</version>  
+                <configuration>  
+                    <container>  
+                        <containerId>tomcat8x</containerId>  
+                        <home>C:\Program Files\Apache Software Foundation\Tomcat 8.0</home>  
+                    </container>  
+                    <configuration>  
+                        <type>existing</type>  
+                        <home>C:\Program Files\Apache Software Foundation\Tomcat 8.0</home>  
+                    </configuration>  
+                </configuration>  
+            </plugin>   -->
         </plugins>  
   
     </build>  
