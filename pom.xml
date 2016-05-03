@@ -209,7 +209,8 @@
             </plugin>  
   
   <!-- 使用Cargo实现远程部署 -->
-<!-- <plugin>
+  <!--  运行命令：mvn cargo:redeploy -->
+ <plugin>
     <groupId>org.codehaus.cargo</groupId>
     <artifactId>cargo-maven2-plugin</artifactId>
     <version>1.4.15</version>
@@ -230,7 +231,7 @@
             </properties>
         </configuration>
     </configuration>
-</plugin> -->
+</plugin> 
   
   
   
