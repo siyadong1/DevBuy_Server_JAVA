@@ -37,5 +37,14 @@ public class TestUserService {
 		
 		
 	}
+	
+	@Test
+	public void testInsertUser(){
+		User user = new User();
+		user.setName("syd3");
+		user.setPassword("123456");
+		userServie.insertUser(user);
+		
+	}
 
 }

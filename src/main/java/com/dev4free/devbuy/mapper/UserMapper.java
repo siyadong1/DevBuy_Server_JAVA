@@ -11,4 +11,8 @@ public interface UserMapper {
 	 */
 	public User findUserById(Integer id);
 	
+	
+	
+	
+	public void insertUser(User user);
 }

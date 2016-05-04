@@ -4,11 +4,15 @@
 <mapper namespace="com.dev4free.devbuy.mapper.UserMapper">
 
 
-<select id="findUserById" parameterType="Integer" resultType="User">
+<select id="findUserById" parameterType="Integer" resultType="UserCustom">
 SELECT * from user WHERE id = #{id}
 </select>
 
 
+<insert id="insertUser" parameterType="User">
 
+INSERT INTO user (name,password) VALUES (#{name},#{password});
+
+</insert>
 
 </mapper>

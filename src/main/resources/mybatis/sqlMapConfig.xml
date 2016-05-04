@@ -10,6 +10,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	<typeAliases>
 		<!-- 批量扫描别名 -->
 		<package name="com.dev4free.devbuy.po"/>
+		<package name="com.dev4free.devbuy.po_custom"/>
 	</typeAliases>
 
 	<!-- 配置mapper
