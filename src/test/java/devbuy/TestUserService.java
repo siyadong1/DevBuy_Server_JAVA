@@ -29,22 +29,29 @@ public class TestUserService {
 	@Autowired
 	UserService userServie;
 	
-	@Test
-	public void test() {
-		
-		User user = userServie.findUserById(1);
-		LOGGER.info("----------------------" + user);
-		
-		
-	}
 	
+	/**
+	 * 插入用户
+	 */
 	@Test
 	public void testInsertUser(){
 		User user = new User();
-		user.setName("syd3");
+		user.setUsername("syd");
 		user.setPassword("123456");
 		userServie.insertUser(user);
 		
 	}
+	
+	/**
+	 * 更新用户
+	 */
 
+	@Test
+	public void testUpdateUser(){
+		
+		User user = userServie.findUserByUsername("syd88");
+		user.setPassword("1111");
+		
+		userServie.updateUser(user);
+	}
 }

@@ -4,15 +4,85 @@
 <mapper namespace="com.dev4free.devbuy.mapper.UserMapper">
 
 
-<select id="findUserById" parameterType="Integer" resultType="UserCustom">
-SELECT * from user WHERE id = #{id}
+<sql id="query_user_by_id">
+<if test="id!=null and id!=''">
+	and id = #{id}
+</if>
+</sql>
+
+<sql id="query_user_by_username">
+<if test="username!=null and username!=''">
+
+	and username = #{username}
+</if>
+</sql>
+
+<sql id="query_user_by_password">
+<if test="password!=null and password!=''">
+
+	and password = #{password}
+</if>
+</sql>
+
+<sql id="query_user_by_avatar">
+<if test="avatar!=null and avatar!=''">
+
+	and avatar = #{avatar}
+</if>
+</sql>
+
+<sql id="query_user_by_nickname">
+<if test="nickname!=null and nickname!=''">
+
+	and nickname = #{nickname}
+</if>
+</sql>
+
+
+<sql id="query_user_by_regtime">
+<if test="regtime!=null and regtime!=''">
+
+	and regtime = #{regtime}
+</if>
+</sql>
+
+<sql id="query_user_by_gender">
+<if test="gender!=null and gender!=''">
+
+	and gender = #{gender}
+</if>
+</sql>
+
+<select id="findUserByUsername" parameterType="String" resultType="User">
+SELECT * FROM user WHERE username = #{username}
+</select>
+
+
+
+<select id="findUserByUser" parameterType="User" resultType="User">
+SELECT * from user 
+<where>
+	<include refid="query_user_by_id"></include>
+	<include refid="query_user_by_username"></include>
+	<include refid="query_user_by_password"></include>
+	<include refid="query_user_by_avatar"></include>
+	<include refid="query_user_by_nickname"></include>
+	<include refid="query_user_by_regtime"></include>
+	<include refid="query_user_by_gender"></include>
+</where>
 </select>
 
 
 <insert id="insertUser" parameterType="User">
 
-INSERT INTO user (name,password) VALUES (#{name},#{password});
+INSERT INTO user VALUES (#{id},#{username},#{password},#{avatar},#{nickname},#{regtime});
 
 </insert>
 
+
+<update id="updateUser" parameterType="User">
+UPDATE user SET username = #{username} , password = #{password} , avatar = #{avatar} , 
+nickname = #{nickname} ,regtime = #{regtime} ,gender = #{gender} WHERE username = #{username}
+
+</update>
 </mapper>
