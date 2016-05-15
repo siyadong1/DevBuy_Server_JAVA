@@ -209,7 +209,7 @@
             </plugin>  
   
   <!-- 使用Cargo实现远程部署 -->
-  <!--  运行命令：mvn cargo:redeploy -->
+  <!--  运行命令：mvn cargo:redeploy 注意：需要先运行 mvn install-->  
  <plugin>
     <groupId>org.codehaus.cargo</groupId>
     <artifactId>cargo-maven2-plugin</artifactId>

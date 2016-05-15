@@ -29,6 +29,12 @@ public class ResponseMessage {
 	}
 	
 	
+	@Override
+	public String toString() {
+		return "ResponseMessage [code=" + code + ", content=" + content + "]";
+	}
+
+	
 	
 	
 	

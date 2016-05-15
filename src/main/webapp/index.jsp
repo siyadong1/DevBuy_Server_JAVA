@@ -23,7 +23,7 @@ p {text-align: center;color: red;size: 64px}
 
 
 <p id="guide1">第二：学习指引</p>
-<a href="http://www.dev4free.com:8090/display/DEV/dev4free+Home" target="_blank">连接地址</a>
+<a href="http://www.dev4free.com:8090/pages/viewpage.action?pageId=1736733" target="_blank">连接地址</a>
 <br/><br/><br/>
 
 
@@ -33,7 +33,41 @@ p {text-align: center;color: red;size: 64px}
 <a href="http://www.dev4free.com:8090/pages/viewpage.action?pageId=1736708" target="_blank">连接地址</a>
 <br/><br/><br/>
 
+<p id="guide1">第四：项目资源</p>
+<table border="1px"  >
+	
+	<tr>
+		<td>app原型图</td>
+		<td><a href="http://115.159.160.105/devbuy/yxt/">http://115.159.160.105/devbuy/yxt/</a></td>
+	</tr>
 
+	<tr>
+		<td>app效果图</td>
+		<td><a href="http://115.159.160.105/devbuy/xgt/">http://115.159.160.105/devbuy/xgt/</a></td>
+	</tr>
+
+	<tr>
+		<td>app图片资源</td>
+		<td><a href="http://115.159.160.105/devbuy/picture/">http://115.159.160.105/devbuy/picture/</a></td>
+	</tr>
+
+	<tr>
+		<td>后台数据库设计</td>
+		<td><a href="http://115.159.160.105/devbuy/database/">http://115.159.160.105/devbuy/database/</a></td>
+	</tr>
+
+</table>
+
+<br/><br/><br/>
+<p id="guide1">第五：接口文档</p>
+<a href="http://www.dev4free.com:8090/pages/viewpage.action?pageId=1736737" target="_blank">连接地址</a>
+<br/><br/><br/>
+
+
+
+<p id="guide1">第六：app下载</p>
+<img alt="链接失败" src="http://www.dev4free.com/devbuy/java/images/devbuy.png">
+<br/><br/><br/>
 
 
 </body> 

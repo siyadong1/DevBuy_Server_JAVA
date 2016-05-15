@@ -1,5 +1,9 @@
 package com.dev4free.devbuy.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -8,8 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
+import com.dev4free.devbuy.constant.Constant;
 import com.dev4free.devbuy.constant.ConstantResponse;
 import com.dev4free.devbuy.entity.ResponseMessage;
 import com.dev4free.devbuy.po.User;
@@ -312,7 +318,7 @@ public class UserController {
 	 */
 	
 	/**
-	 * 修改登录密码
+	 * 修改昵称
 	 * @param user
 	 * @param newpassword
 	 * @param confirmpassword
@@ -348,6 +354,8 @@ public class UserController {
 		
 		
 	}
+
+	
 	
 	
 	
@@ -399,13 +407,100 @@ public class UserController {
 		user2.setGender(gender);
 		userService.updateUser(user2);
 		
-		
-		
 		return responseMessage;
 		
 		
 	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/**
+	 * ***********************************************************************************
+	 */
+	
+	/**
+	 * 修改用户头像
+	 * @param user
+	 * @param avatar
+	 * @return
+	 */
+	@RequestMapping(value = "/modifyavatar")
+	private @ResponseBody ResponseMessage modifyavatar(User user,MultipartFile avatarpic){
+		
+		ResponseMessage responseMessage = new ResponseMessage();
+		
+		//输入参数非空校验
+		if (user == null || TextUtils.isEmpty(user.getUsername()) || avatarpic == null) {
+			responseMessage.setCode(ConstantResponse.CODE_PARAMETER_EMPTY);
+			responseMessage.setContent(ConstantResponse.CONTENT_PARAMETER_EMPTY);
+			return responseMessage;
+		}
+		
+		//判断用户是否存在
+		User user2 = userService.findUserByUsername(user.getUsername());
+		if (user2 == null) {
+			responseMessage.setCode(ConstantResponse.CODE_USER_NOEXISTS);
+			responseMessage.setContent(ConstantResponse.CONTENT_USER_NOEXISTS);
+			return responseMessage;
+		}
+		
+		
+		//上传的头像的名称
+		String avatarName = avatarpic.getOriginalFilename();
+		//存入数据库中头像的名称
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+		String avatarNewName = user.getUsername() + "-" + simpleDateFormat.format(new Date()) + avatarName.substring(avatarName.lastIndexOf("."));
+		//上传头像的路径。这里将图片存储在本地服务器  /usr/local/images/avatar/
+		File uploadFile = new File(Constant.IMAGE_ROOT_REAL_PATH + Constant.IMAGE_AVATAR + avatarNewName);
+		
+		
+		if (!uploadFile.exists()) {
+			uploadFile.mkdirs();
+		}
+		
+		try {
+			avatarpic.transferTo(uploadFile);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		//更新用户
+		//采用Tomcat的虚拟目录将本地"/usr/local/images/“这个路径映射到”http://www.dev4free.com/devbuy/java/images/“
+		user2.setAvatar(Constant.IMAGE_ROOT_MAPPING_PATH + Constant.IMAGE_AVATAR + avatarNewName);
+		userService.updateUser(user2);
+		
+		responseMessage.setContent(user2.getAvatar());
+
+		return responseMessage;
+		
+		
+	}
 	
 	
 	
