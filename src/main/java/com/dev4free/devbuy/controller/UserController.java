@@ -471,25 +471,25 @@ public class UserController {
 	 * 查询城市名称
 	 * @return
 	 */
-//	@RequestMapping(value = "/modifycityname")
-//	private @ResponseBody ResponseMessage findCityName(){
-//		ResponseMessage responseMessage = new ResponseMessage();
-//		
-//		//查询数据库，进行业务层的操作
-//		City city = userService.modifycityname();
-//
-//		//对返回的结果进行校验
-//		if (city == null) {
-//			responseMessage.setCode(ConstantResponse.CODE_USER_NOEXISTS);
-//			responseMessage.setContent(ConstantResponse.CONTENT_USER_NOEXISTS);
-//			return responseMessage;
-//		}
-//		
-//		//数据交互Json嵌套的方式对responseMessage进行数据填充。
-//		responseMessage.setContent(JSON.toJSON(city));
-//		
-//		return responseMessage;
-//	}
+	@RequestMapping(value = "/modifycityname")
+	private @ResponseBody ResponseMessage findCityName(){
+		ResponseMessage responseMessage = new ResponseMessage();
+		
+		//查询数据库，进行业务层的操作
+		City city = userService.modifycityname();
+
+		//对返回的结果进行校验
+		if (city == null) {
+			responseMessage.setCode(ConstantResponse.CODE_USER_NOEXISTS);
+			responseMessage.setContent(ConstantResponse.CONTENT_USER_NOEXISTS);
+			return responseMessage;
+		}
+		
+		//数据交互Json嵌套的方式对responseMessage进行数据填充。
+		responseMessage.setContent(JSON.toJSON(city));
+		
+		return responseMessage;
+	}
 	
 	
 	

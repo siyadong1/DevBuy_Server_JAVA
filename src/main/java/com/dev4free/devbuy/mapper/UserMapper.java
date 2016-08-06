@@ -1,6 +1,6 @@
 package com.dev4free.devbuy.mapper;
 
-import java.util.ArrayList;
+
 
 import com.dev4free.devbuy.po.City;
 import com.dev4free.devbuy.po.User;
@@ -40,5 +40,5 @@ public interface UserMapper {
 	/**
 	 * 查询城市名称
 	 */
-//	public City modifycityname();
+	public City modifycityname();
 }

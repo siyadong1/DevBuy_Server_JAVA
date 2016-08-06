@@ -64,12 +64,12 @@ public class UserServiceImpl implements UserService{
 	 * 查询城市名称
 	 * 
 	 */
-//	public City modifycityname() {
-//		
-//		City city = userMapper.modifycityname();
-//		
-//		return city;
-//	}
+	public City modifycityname() {
+		
+		City city = userMapper.modifycityname();
+		
+		return city;
+	}
 
 
 }
