@@ -1,8 +1,11 @@
 package com.dev4free.devbuy.serviceImp;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.dev4free.devbuy.mapper.UserMapper;
+import com.dev4free.devbuy.po.City;
 import com.dev4free.devbuy.po.User;
 import com.dev4free.devbuy.service.UserService;
 
@@ -11,7 +14,6 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	UserMapper userMapper;
 	
-
 	
 	/**
 	 * 根据用户名查找用户
@@ -25,9 +27,6 @@ public class UserServiceImpl implements UserService{
 		return user;
 	}
 
-
-
-	
 	/**
 	 * 根据user对象中，属性值不为0的属性进行查找
 	 * @param user
@@ -60,5 +59,17 @@ public class UserServiceImpl implements UserService{
 		userMapper.updateUser(user);
 		
 	}
+	
+	/**
+	 * 查询城市名称
+	 * 
+	 */
+//	public City modifycityname() {
+//		
+//		City city = userMapper.modifycityname();
+//		
+//		return city;
+//	}
+
 
 }

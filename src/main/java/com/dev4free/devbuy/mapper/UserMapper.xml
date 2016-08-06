@@ -85,4 +85,11 @@ UPDATE user SET username = #{username} , password = #{password} , avatar = #{ava
 nickname = #{nickname} ,regtime = #{regtime} ,gender = #{gender} WHERE username = #{username}
 
 </update>
+
+<select id="findCityName" resultType="City">
+<!-- SELECT * FROM city  -->
+SELECT * FROM `city` WHERE cityName="北京"
+</select>
+
+
 </mapper>

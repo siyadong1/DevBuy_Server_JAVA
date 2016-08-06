@@ -3,6 +3,7 @@ package com.dev4free.devbuy.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +19,7 @@ import com.alibaba.fastjson.JSON;
 import com.dev4free.devbuy.constant.Constant;
 import com.dev4free.devbuy.constant.ConstantResponse;
 import com.dev4free.devbuy.entity.ResponseMessage;
+import com.dev4free.devbuy.po.City;
 import com.dev4free.devbuy.po.User;
 import com.dev4free.devbuy.service.UserService;
 import com.dev4free.devbuy.utils.TextUtils;
@@ -301,16 +303,7 @@ public class UserController {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	/**
@@ -356,22 +349,6 @@ public class UserController {
 	}
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	/**
 	 * ***********************************************************************************
@@ -414,25 +391,7 @@ public class UserController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	/**
@@ -501,6 +460,37 @@ public class UserController {
 		
 		
 	}
+	
+	
+	
+	/**
+	 * ***********************************************************************************
+	 */
+	
+	/**
+	 * 查询城市名称
+	 * @return
+	 */
+//	@RequestMapping(value = "/modifycityname")
+//	private @ResponseBody ResponseMessage findCityName(){
+//		ResponseMessage responseMessage = new ResponseMessage();
+//		
+//		//查询数据库，进行业务层的操作
+//		City city = userService.modifycityname();
+//
+//		//对返回的结果进行校验
+//		if (city == null) {
+//			responseMessage.setCode(ConstantResponse.CODE_USER_NOEXISTS);
+//			responseMessage.setContent(ConstantResponse.CONTENT_USER_NOEXISTS);
+//			return responseMessage;
+//		}
+//		
+//		//数据交互Json嵌套的方式对responseMessage进行数据填充。
+//		responseMessage.setContent(JSON.toJSON(city));
+//		
+//		return responseMessage;
+//	}
+	
 	
 	
 	
