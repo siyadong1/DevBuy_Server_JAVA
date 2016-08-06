@@ -81,7 +81,7 @@ public class UserController {
 		}
 		
 		//查询数据库，进行业务层的操作
-		User user = userService.findUserByUsername(username);
+		User user = userService.findUserByUsername();
 		
 		//对返回的结果进行校验
 		if (user == null) {
