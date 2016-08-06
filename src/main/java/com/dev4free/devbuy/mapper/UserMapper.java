@@ -40,5 +40,5 @@ public interface UserMapper {
 	/**
 	 * 查询城市名称
 	 */
-	public City modifycityname();
+	public City modifycityname(String cityName);
 }

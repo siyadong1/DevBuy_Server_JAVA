@@ -472,11 +472,11 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/modifycityname")
-	private @ResponseBody ResponseMessage findCityName(){
+	private @ResponseBody ResponseMessage findCityName(String cityName){
 		ResponseMessage responseMessage = new ResponseMessage();
 		
 		//查询数据库，进行业务层的操作
-		City city = userService.modifycityname();
+		City city = userService.modifycityname(cityName);
 
 		//对返回的结果进行校验
 		if (city == null) {

@@ -64,9 +64,9 @@ public class UserServiceImpl implements UserService{
 	 * 查询城市名称
 	 * 
 	 */
-	public City modifycityname() {
+	public City modifycityname(String cityName) {
 		
-		City city = userMapper.modifycityname();
+		City city = userMapper.modifycityname(cityName);
 		
 		return city;
 	}

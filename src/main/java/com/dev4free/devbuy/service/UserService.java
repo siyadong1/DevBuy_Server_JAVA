@@ -41,5 +41,5 @@ public interface UserService {
 	 * 查询城市名称
 	 * @return 
 	 */
-	public City modifycityname();
+	public City modifycityname(String cityName);
 }
