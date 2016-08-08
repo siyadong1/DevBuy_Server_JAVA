@@ -86,10 +86,5 @@ nickname = #{nickname} ,regtime = #{regtime} ,gender = #{gender} WHERE username 
 
 </update>
 
-<select id="modifycityname" resultType="City">
-<!-- SELECT * FROM city  -->
-SELECT * FROM city
-</select>
-
 
 </mapper>
