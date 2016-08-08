@@ -1,8 +1,6 @@
 package com.dev4free.devbuy.mapper;
 
 
-
-import com.dev4free.devbuy.po.City;
 import com.dev4free.devbuy.po.User;
 
 public interface UserMapper {
@@ -36,9 +34,5 @@ public interface UserMapper {
 	 */
 	public void updateUser(User user);
 	
-	
-	/**
-	 * 查询城市名称
-	 */
-	public City modifycityname(String cityName);
+
 }

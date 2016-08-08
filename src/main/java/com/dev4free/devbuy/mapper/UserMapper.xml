@@ -86,9 +86,9 @@ nickname = #{nickname} ,regtime = #{regtime} ,gender = #{gender} WHERE username 
 
 </update>
 
-<select id="modifycityname" parameterType="String" resultType="City">
+<select id="modifycityname" resultType="City">
 <!-- SELECT * FROM city  -->
-SELECT * FROM city WHERE cityName= #{cityName}
+SELECT * FROM city
 </select>
 
 

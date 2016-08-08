@@ -1,7 +1,6 @@
 package com.dev4free.devbuy.service;
 
 
-import com.dev4free.devbuy.po.City;
 import com.dev4free.devbuy.po.User;
 
 public interface UserService {
@@ -36,10 +35,4 @@ public interface UserService {
 	 */
 	public void updateUser(User user);
 	
-	
-	/**
-	 * 查询城市名称
-	 * @return 
-	 */
-	public City modifycityname(String cityName);
 }

@@ -3,7 +3,6 @@ package com.dev4free.devbuy.controller;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import javax.servlet.http.HttpSession;
 
@@ -19,7 +18,6 @@ import com.alibaba.fastjson.JSON;
 import com.dev4free.devbuy.constant.Constant;
 import com.dev4free.devbuy.constant.ConstantResponse;
 import com.dev4free.devbuy.entity.ResponseMessage;
-import com.dev4free.devbuy.po.City;
 import com.dev4free.devbuy.po.User;
 import com.dev4free.devbuy.service.UserService;
 import com.dev4free.devbuy.utils.TextUtils;
@@ -66,7 +64,8 @@ public class UserController {
 	@RequestMapping(value="/findUserByName")
 	//@ResponseBody表示将ResponseMessage这个java对象转换成Json格式
 	//该项目均采用Json格式进行数据交互
-	private @ResponseBody ResponseMessage findUserByName (String username) {
+	//@RequestParam(value="uname",required=true,defaultValue="syd88")简单类型的数据绑定，request中的参数与controller形参不一致时
+	private @ResponseBody ResponseMessage findUserByName(String username) {
 		
 		
 		
@@ -81,7 +80,7 @@ public class UserController {
 		}
 		
 		//查询数据库，进行业务层的操作
-		User user = userService.findUserByUsername();
+		User user = userService.findUserByUsername(username);
 		
 		//对返回的结果进行校验
 		if (user == null) {
@@ -460,39 +459,6 @@ public class UserController {
 		
 		
 	}
-	
-	
-	
-	/**
-	 * ***********************************************************************************
-	 */
-	
-	/**
-	 * 查询城市名称
-	 * @return
-	 */
-	@RequestMapping(value = "/modifycityname")
-	private @ResponseBody ResponseMessage findCityName(String cityName){
-		ResponseMessage responseMessage = new ResponseMessage();
-		
-		//查询数据库，进行业务层的操作
-		City city = userService.modifycityname(cityName);
-
-		//对返回的结果进行校验
-		if (city == null) {
-			responseMessage.setCode(ConstantResponse.CODE_USER_NOEXISTS);
-			responseMessage.setContent(ConstantResponse.CONTENT_USER_NOEXISTS);
-			return responseMessage;
-		}
-		
-		//数据交互Json嵌套的方式对responseMessage进行数据填充。
-		responseMessage.setContent(JSON.toJSON(city));
-		
-		return responseMessage;
-	}
-	
-	
-	
 	
 	
 }

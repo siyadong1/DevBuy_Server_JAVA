@@ -1,11 +1,8 @@
 package com.dev4free.devbuy.serviceImp;
 
-import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.dev4free.devbuy.mapper.UserMapper;
-import com.dev4free.devbuy.po.City;
 import com.dev4free.devbuy.po.User;
 import com.dev4free.devbuy.service.UserService;
 
@@ -60,16 +57,6 @@ public class UserServiceImpl implements UserService{
 		
 	}
 	
-	/**
-	 * 查询城市名称
-	 * 
-	 */
-	public City modifycityname(String cityName) {
-		
-		City city = userMapper.modifycityname(cityName);
-		
-		return city;
-	}
 
 
 }
