@@ -1,5 +1,6 @@
 package com.dev4free.devbuy.service;
 
+
 import com.dev4free.devbuy.po.User;
 
 public interface UserService {
@@ -33,4 +34,5 @@ public interface UserService {
 	 * @param user
 	 */
 	public void updateUser(User user);
+	
 }

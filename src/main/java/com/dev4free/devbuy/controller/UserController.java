@@ -64,7 +64,8 @@ public class UserController {
 	@RequestMapping(value="/findUserByName")
 	//@ResponseBody表示将ResponseMessage这个java对象转换成Json格式
 	//该项目均采用Json格式进行数据交互
-	private @ResponseBody ResponseMessage findUserByName (String username) {
+	//@RequestParam(value="uname",required=true,defaultValue="syd88")简单类型的数据绑定，request中的参数与controller形参不一致时
+	private @ResponseBody ResponseMessage findUserByName(String username) {
 		
 		
 		
@@ -301,16 +302,7 @@ public class UserController {
 		
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	/**
@@ -356,22 +348,6 @@ public class UserController {
 	}
 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	/**
 	 * ***********************************************************************************
@@ -414,25 +390,7 @@ public class UserController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	/**
@@ -501,8 +459,6 @@ public class UserController {
 		
 		
 	}
-	
-	
 	
 	
 }

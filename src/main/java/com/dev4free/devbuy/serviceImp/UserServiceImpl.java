@@ -11,7 +11,6 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	UserMapper userMapper;
 	
-
 	
 	/**
 	 * 根据用户名查找用户
@@ -25,9 +24,6 @@ public class UserServiceImpl implements UserService{
 		return user;
 	}
 
-
-
-	
 	/**
 	 * 根据user对象中，属性值不为0的属性进行查找
 	 * @param user
@@ -60,5 +56,7 @@ public class UserServiceImpl implements UserService{
 		userMapper.updateUser(user);
 		
 	}
+	
+
 
 }

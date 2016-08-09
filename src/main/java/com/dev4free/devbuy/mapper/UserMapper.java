@@ -1,5 +1,6 @@
 package com.dev4free.devbuy.mapper;
 
+
 import com.dev4free.devbuy.po.User;
 
 public interface UserMapper {
@@ -32,4 +33,6 @@ public interface UserMapper {
 	 * @param user
 	 */
 	public void updateUser(User user);
+	
+
 }

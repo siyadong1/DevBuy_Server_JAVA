@@ -75,7 +75,7 @@ SELECT * from user
 
 <insert id="insertUser" parameterType="User">
 
-INSERT INTO user VALUES (#{id},#{username},#{password},#{avatar},#{nickname},#{regtime});
+INSERT INTO user(id,username,password,avatar,nickname,regtime) VALUES (#{id},#{username},#{password},#{avatar},#{nickname},#{regtime});
 
 </insert>
 
@@ -85,4 +85,6 @@ UPDATE user SET username = #{username} , password = #{password} , avatar = #{ava
 nickname = #{nickname} ,regtime = #{regtime} ,gender = #{gender} WHERE username = #{username}
 
 </update>
+
+
 </mapper>
