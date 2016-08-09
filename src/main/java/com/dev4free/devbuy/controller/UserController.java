@@ -34,7 +34,7 @@ import com.dev4free.devbuy.utils.UUIDUtils;
  */
 //@Controller采用注解的方式编写处理器控制器
 @Controller
-//@RequestMapping窄化请求，规定请求支持的放发。value表示请求的路径，method表示请求的方法，移动端项目仅支持post。测试的时候可以暂时采用get方便调试
+//@RequestMapping窄化请求，规定请求支持的方法。value表示请求的路径，method表示请求的方法，移动端项目仅支持post。测试的时候可以暂时采用get方便调试
 @RequestMapping(value="/java/",method={RequestMethod.POST,RequestMethod.GET})
 public class UserController {
 
