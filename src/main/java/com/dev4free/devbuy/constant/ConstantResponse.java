@@ -29,5 +29,11 @@ public class ConstantResponse {
 	public static final String CONTENT_USER_PASSWORD_DISMATCH = "新密码和确认密码不一致";
 	
 	
+	public static final String CODE_CITY_NOEXISTS = "0000006";
+	public static final String CONTENT_CITY_NOEXISTS = "城市名称列表获取失败";
+	
+	
+	public static final String CODE_CONTACTADDRESS_NOEXISTS = "0000007";
+	public static final String CONTENT_CONTACTADDRESS_NOEXISTS = "收货地址不存在，请添加新地址";
 	
 }
