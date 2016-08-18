@@ -14,10 +14,7 @@
 		http://www.springframework.org/schema/tx/spring-tx-4.1.xsd ">
 		
 <!-- service -->
-<bean id="UserService" class="com.dev4free.devbuy.serviceImp.UserServiceImpl">
-</bean>
-
-<bean id="CityService" class="com.dev4free.devbuy.serviceImp.CityServiceImpl">
-</bean>
+ <bean id="UserService" class="com.dev4free.devbuy.serviceImp.UserServiceImpl"></bean>
+<bean id="CityService" class="com.dev4free.devbuy.serviceImp.CityServiceImpl"></bean>
 
 </beans>
