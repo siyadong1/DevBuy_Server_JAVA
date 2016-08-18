@@ -36,4 +36,10 @@ public class ConstantResponse {
 	public static final String CODE_CONTACTADDRESS_NOEXISTS = "0000007";
 	public static final String CONTENT_CONTACTADDRESS_NOEXISTS = "收货地址不存在，请添加新地址";
 	
+	
+	public static final String CODE_SHIPPINGADDRESS_EMPTY = "0000008";
+	public static final String CONTENT_SHIPPINGADDRESS_EMPTY = "收货地址不完整";
+	
+	
+	
 }

@@ -11,4 +11,10 @@ public interface AddressMapper {
 	 * @return 
 	 */
 	public ArrayList<Address> findAddressByUserName(String username);
+	
+	/**
+	 * 插入收货地址
+	 * @param address
+	 */
+	public void insertShippingAddress(Address address);
 }

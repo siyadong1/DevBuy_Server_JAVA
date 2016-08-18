@@ -16,6 +16,7 @@ import com.dev4free.devbuy.po.User;
 import com.dev4free.devbuy.service.AddressService;
 import com.dev4free.devbuy.service.UserService;
 import com.dev4free.devbuy.utils.TextUtils;
+import com.dev4free.devbuy.utils.customObjectUtils;
 
 @Controller
 @RequestMapping(value="/java/",method={RequestMethod.POST,RequestMethod.GET})
@@ -57,6 +58,24 @@ public class AddressController {
 		}
 		
 		responseMessage.setContent(JSON.toJSON(address));
+		
+		return responseMessage;
+		
+	}
+	
+	@RequestMapping(value="/insertShippingAddress")
+	private @ResponseBody ResponseMessage insertShippingAddress(Address address){
+		
+		//返回给移动端的数据
+		ResponseMessage responseMessage = new ResponseMessage();
+		
+		if(address==null||customObjectUtils.isAddressEmpty(address)){
+			responseMessage.setCode(ConstantResponse.CODE_SHIPPINGADDRESS_EMPTY);
+			responseMessage.setContent(ConstantResponse.CONTENT_SHIPPINGADDRESS_EMPTY);
+			return responseMessage;
+		}
+		
+		addressService.insertShippingAddress(address);
 		
 		return responseMessage;
 		

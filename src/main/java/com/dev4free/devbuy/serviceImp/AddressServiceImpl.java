@@ -21,4 +21,9 @@ public class AddressServiceImpl implements AddressService {
 		return address;
 	}
 
+	public void insertShippingAddress(Address address) {
+
+		addressMapper.insertShippingAddress(address);
+	}
+
 }

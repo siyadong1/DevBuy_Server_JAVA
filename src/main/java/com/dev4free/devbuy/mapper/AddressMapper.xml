@@ -7,5 +7,9 @@
 SELECT * FROM address WHERE username = #{username}
 </select>
 
+<insert id="insertShippingAddress" parameterType="Address">
+INSERT INTO address(username,consignee_name,phone_number,province,city,detail_address) 
+VALUES (#{username},#{consignee_name},#{phone_number},#{province},#{city},#{detail_address});
+</insert>
 
 </mapper>
