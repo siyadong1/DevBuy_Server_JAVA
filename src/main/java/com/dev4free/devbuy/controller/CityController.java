@@ -52,8 +52,8 @@ public class CityController {
 
 		//对返回的结果进行校验
 		if (city == null) {
-			responseMessage.setCode(ConstantResponse.CODE_USER_NOEXISTS);
-			responseMessage.setContent(ConstantResponse.CONTENT_USER_NOEXISTS);
+			responseMessage.setCode(ConstantResponse.CODE_CITY_NOEXISTS);
+			responseMessage.setContent(ConstantResponse.CONTENT_CITY_NOEXISTS);
 			return responseMessage;
 		}
 		

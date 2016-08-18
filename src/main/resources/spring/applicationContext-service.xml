@@ -17,4 +17,7 @@
  <bean id="UserService" class="com.dev4free.devbuy.serviceImp.UserServiceImpl"></bean>
 <bean id="CityService" class="com.dev4free.devbuy.serviceImp.CityServiceImpl"></bean>
 
+<bean id ="AddressService" class="com.dev4free.devbuy.serviceImp.AddressServiceImpl">
+</bean>
+
 </beans>
