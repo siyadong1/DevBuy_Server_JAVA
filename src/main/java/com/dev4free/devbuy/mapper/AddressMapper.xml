@@ -7,9 +7,24 @@
 SELECT * FROM address WHERE username = #{username}
 </select>
 
+<select id="findAddressById" parameterType="String" resultType="Address">
+SELECT * FROM address WHERE id = #{id}
+</select>
+
 <insert id="insertShippingAddress" parameterType="Address">
-INSERT INTO address(username,consignee_name,phone_number,province,city,detail_address) 
-VALUES (#{username},#{consignee_name},#{phone_number},#{province},#{city},#{detail_address});
+INSERT INTO address(id,username,consignee_name,phone_number,province,city,detail_address) 
+VALUES (id=#{id},#{username},#{consignee_name},#{phone_number},#{province},#{city},#{detail_address});
 </insert>
+
+<update id="updateShippingAddress" parameterType="Address">
+UPDATE address SET username=#{username},
+					consignee_name=#{consignee_name},
+					phone_number=#{phone_number},
+					province=#{province},
+					city=#{city},
+					detail_address=#{detail_address} 
+WHERE id=#{id}
+</update>
+
 
 </mapper>

@@ -33,8 +33,8 @@ public class ConstantResponse {
 	public static final String CONTENT_CITY_NOEXISTS = "城市名称列表获取失败";
 	
 	
-	public static final String CODE_CONTACTADDRESS_NOEXISTS = "0000007";
-	public static final String CONTENT_CONTACTADDRESS_NOEXISTS = "收货地址不存在，请添加新地址";
+	public static final String CODE_SHIPPINGADDRESS_NOEXISTS = "0000007";
+	public static final String CONTENT_SHIPPINGADDRESS_NOEXISTS = "收货地址不存在";
 	
 	
 	public static final String CODE_SHIPPINGADDRESS_EMPTY = "0000008";

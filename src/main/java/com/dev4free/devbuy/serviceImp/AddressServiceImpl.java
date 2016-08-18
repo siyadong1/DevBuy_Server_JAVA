@@ -21,9 +21,22 @@ public class AddressServiceImpl implements AddressService {
 		return address;
 	}
 
+	public Address findAddressById(String id) {
+		
+		Address address = addressMapper.findAddressById(id);
+		
+		return address;
+	}
+	
 	public void insertShippingAddress(Address address) {
 
 		addressMapper.insertShippingAddress(address);
 	}
+
+	public void updateShippingAddress(Address address) {
+
+		addressMapper.updateShippingAddress(address);
+	}
+
 
 }

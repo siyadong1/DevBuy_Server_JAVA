@@ -16,6 +16,7 @@ import com.dev4free.devbuy.po.User;
 import com.dev4free.devbuy.service.AddressService;
 import com.dev4free.devbuy.service.UserService;
 import com.dev4free.devbuy.utils.TextUtils;
+import com.dev4free.devbuy.utils.UUIDUtils;
 import com.dev4free.devbuy.utils.customObjectUtils;
 
 @Controller
@@ -52,8 +53,8 @@ public class AddressController {
 		ArrayList<Address> address = addressService.findAddressByUserName(username);
 		
 		if(address==null){
-			responseMessage.setCode(ConstantResponse.CODE_CONTACTADDRESS_NOEXISTS);
-			responseMessage.setContent(ConstantResponse.CONTENT_CONTACTADDRESS_NOEXISTS);
+			responseMessage.setCode(ConstantResponse.CODE_SHIPPINGADDRESS_NOEXISTS);
+			responseMessage.setContent(ConstantResponse.CONTENT_SHIPPINGADDRESS_NOEXISTS);
 			return responseMessage;			
 		}
 		
@@ -74,8 +75,34 @@ public class AddressController {
 			responseMessage.setContent(ConstantResponse.CONTENT_SHIPPINGADDRESS_EMPTY);
 			return responseMessage;
 		}
-		
+		address.setId(UUIDUtils.getId()); //传入参数中不包括id项
 		addressService.insertShippingAddress(address);
+		
+		return responseMessage;
+		
+	}
+	
+	@RequestMapping(value="/updateShippingAddress")
+	private @ResponseBody ResponseMessage updateShippingAddress(Address address){
+		
+		//返回给移动端的数据
+		ResponseMessage responseMessage = new ResponseMessage();
+		
+		if(address==null || TextUtils.isEmpty(address.getId())){
+			responseMessage.setCode(ConstantResponse.CODE_SHIPPINGADDRESS_EMPTY);
+			responseMessage.setCode(ConstantResponse.CONTENT_SHIPPINGADDRESS_EMPTY);
+			return responseMessage;			
+		}
+		
+		Address addr = addressService.findAddressById(address.getId());
+		
+		if(addr==null){
+			responseMessage.setCode(ConstantResponse.CODE_SHIPPINGADDRESS_NOEXISTS);
+			responseMessage.setContent(ConstantResponse.CONTENT_SHIPPINGADDRESS_NOEXISTS);
+			return responseMessage;
+		}
+		
+		addressService.updateShippingAddress(address);
 		
 		return responseMessage;
 		
