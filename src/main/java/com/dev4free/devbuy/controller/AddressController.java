@@ -75,6 +75,7 @@ public class AddressController {
 			responseMessage.setContent(ConstantResponse.CONTENT_SHIPPINGADDRESS_EMPTY);
 			return responseMessage;
 		}
+		
 		address.setId(UUIDUtils.getId()); //传入参数中不包括id项
 		addressService.insertShippingAddress(address);
 		
@@ -90,7 +91,7 @@ public class AddressController {
 		
 		if(address==null || TextUtils.isEmpty(address.getId())){
 			responseMessage.setCode(ConstantResponse.CODE_SHIPPINGADDRESS_EMPTY);
-			responseMessage.setCode(ConstantResponse.CONTENT_SHIPPINGADDRESS_EMPTY);
+			responseMessage.setContent(ConstantResponse.CONTENT_SHIPPINGADDRESS_EMPTY);
 			return responseMessage;			
 		}
 		

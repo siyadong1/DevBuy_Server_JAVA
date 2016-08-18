@@ -13,12 +13,11 @@ SELECT * FROM address WHERE id = #{id}
 
 <insert id="insertShippingAddress" parameterType="Address">
 INSERT INTO address(id,username,consignee_name,phone_number,province,city,detail_address) 
-VALUES (id=#{id},#{username},#{consignee_name},#{phone_number},#{province},#{city},#{detail_address});
+VALUES (#{id},#{username},#{consignee_name},#{phone_number},#{province},#{city},#{detail_address});
 </insert>
 
 <update id="updateShippingAddress" parameterType="Address">
-UPDATE address SET username=#{username},
-					consignee_name=#{consignee_name},
+UPDATE address SET consignee_name=#{consignee_name},
 					phone_number=#{phone_number},
 					province=#{province},
 					city=#{city},
