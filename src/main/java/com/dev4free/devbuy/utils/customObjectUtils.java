@@ -9,6 +9,11 @@ import com.dev4free.devbuy.po_custom.AddressCustom;
  */
 public class customObjectUtils {
 
+	/**
+	 * 判断addressCustom的各项属性是否为空或“”
+	 * @param addressCustom
+	 * @return
+	 */
 	public static boolean isAddressEmpty(AddressCustom addressCustom){
 		
 		boolean flag = TextUtils.isEmpty(addressCustom.getUsername())

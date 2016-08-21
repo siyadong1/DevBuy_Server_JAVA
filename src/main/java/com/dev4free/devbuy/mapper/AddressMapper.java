@@ -15,7 +15,7 @@ public interface AddressMapper {
 	public ArrayList<Address> findAddressByAddress(AddressCustom addressCustom);
 	
 	/**
-	 * 插入收货地址
+	 * 添加收货地址
 	 * @param address
 	 */
 	public void insertShippingAddress(Address address);
