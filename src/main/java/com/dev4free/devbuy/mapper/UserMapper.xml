@@ -75,7 +75,8 @@ SELECT * from user
 
 <insert id="insertUser" parameterType="User">
 
-INSERT INTO user(id,username,password,avatar,nickname,regtime) VALUES (#{id},#{username},#{password},#{avatar},#{nickname},#{regtime});
+INSERT INTO user(id,username,password,avatar,nickname,regtime) 
+VALUES (#{id},#{username},#{password},#{avatar},#{nickname},#{regtime});
 
 </insert>
 

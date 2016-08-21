@@ -56,6 +56,7 @@
 	
 	
 	<!-- 文件上传 -->
+	<!-- 页面form中提交enctype="multipart/form-data"的数据时，需要springmvc对multipart类型的数据进行解析 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- 设置上传文件的最大尺寸为5MB -->

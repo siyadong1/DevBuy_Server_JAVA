@@ -19,11 +19,11 @@ public class Constant {
 	/**
 	 * 图片实际存放路径
 	 */
-	public static final String IMAGE_ROOT_REAL_PATH= "/usr/local/images/" ;
+	public static final String IMAGE_ROOT_REAL_PATH= "/user/local/images/" ;
 	
 	
 	/**
-	 * 图片实际存放路径
+	 * 图片存放路径（服务器端）
 	 */
 	public static final String IMAGE_ROOT_MAPPING_PATH= "http://www.dev4free.com/devbuy/java/images/";
 	
@@ -31,6 +31,11 @@ public class Constant {
 	 * 存放头像图片
 	 */
 	public static final String IMAGE_AVATAR= "avatar/";
+	
+	/**
+	 * 存放商品图片
+	 */
+	public static final String IMAGE_ITEMS = "itemsPicture/";
 	
 
 }

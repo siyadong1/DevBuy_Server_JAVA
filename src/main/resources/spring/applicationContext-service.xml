@@ -23,4 +23,7 @@
 <bean id ="AddressService" class="com.dev4free.devbuy.serviceImp.AddressServiceImpl">
 </bean>
 
+<bean id="ItemsService" class="com.dev4free.devbuy.serviceImp.ItemsServiceImpl">
+</bean>
+
 </beans>
