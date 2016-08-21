@@ -1,6 +1,6 @@
 package com.dev4free.devbuy.utils;
 
-import com.dev4free.devbuy.po.Address;
+import com.dev4free.devbuy.po_custom.AddressCustom;
 
 /**
  * 对象处理工具类
@@ -9,14 +9,14 @@ import com.dev4free.devbuy.po.Address;
  */
 public class customObjectUtils {
 
-	public static boolean isAddressEmpty(Address address){
+	public static boolean isAddressEmpty(AddressCustom addressCustom){
 		
-		boolean flag = TextUtils.isEmpty(address.getUsername())
-						||TextUtils.isEmpty(address.getConsignee_name())
-				        ||TextUtils.isEmpty(address.getPhone_number())
-				        ||TextUtils.isEmpty(address.getProvince())
-				        ||TextUtils.isEmpty(address.getCity())
-				        ||TextUtils.isEmpty(address.getDetail_address());
+		boolean flag = TextUtils.isEmpty(addressCustom.getUsername())
+						||TextUtils.isEmpty(addressCustom.getConsignee_name())
+				        ||TextUtils.isEmpty(addressCustom.getPhone_number())
+				        ||TextUtils.isEmpty(addressCustom.getProvince())
+				        ||TextUtils.isEmpty(addressCustom.getCity())
+				        ||TextUtils.isEmpty(addressCustom.getDetail_address());
 		
 		return flag;
 		

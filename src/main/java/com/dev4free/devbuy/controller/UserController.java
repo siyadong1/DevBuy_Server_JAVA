@@ -135,7 +135,7 @@ public class UserController {
 			return responseMessage;
 		}
 		
-		user.setId(UUIDUtils.getId());
+		user.setUser_id(UUIDUtils.getId());
 		user.setRegtime(TimeUtils.getNow());
 		userService.insertUser(user);
 		
@@ -182,7 +182,7 @@ public class UserController {
 		}
 		
 
-		httpSession.setAttribute("id", user2.getId());
+		httpSession.setAttribute("id", user2.getUser_id());
 		return responseMessage;
 		
 	}

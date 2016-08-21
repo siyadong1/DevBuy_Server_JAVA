@@ -3,26 +3,91 @@
 
 <mapper namespace="com.dev4free.devbuy.mapper.AddressMapper">
 
-<select id="findAddressByUserName" parameterType="String" resultType="Address">
-SELECT * FROM address WHERE username = #{username}
+<sql id="query_address_by_address_id">
+<if test="address_id!=null and address_id!=''">
+	and address_id = #{address_id}
+</if>
+</sql>
+
+<sql id="query_address_by_user_id">
+<if test="user_id!=null and user_id!=''">
+	and user_id = #{user_id}
+</if>
+</sql>
+
+<sql id="query_address_by_consignee_name">
+<if test="consignee_name!=null and consignee_name!=''">
+	and consignee_name = #{consignee_name}
+</if>
+</sql>
+
+<sql id="query_address_by_phone_number">
+<if test="phone_number!=null and phone_number!=''">
+	and phone_number = #{phone_number}
+</if>
+</sql>
+
+<sql id="query_address_by_province">
+<if test="province!=null and province!=''">
+	and province = #{province}
+</if>
+</sql>
+
+
+<sql id="query_address_by_city">
+<if test="city!=null and city!=''">
+	and city = #{city}
+</if>
+</sql>
+
+<sql id="query_address_by_detail_address">
+<if test="detail_address!=null and detail_address!=''">
+	and detail_address = #{detail_address}
+</if>
+</sql>
+
+<sql id="query_address_by_default_address">
+<if test="default_address!=null and default_address!=''">
+	and default_address = #{default_address}
+</if>
+</sql>
+
+
+
+<select id="findAddressByAddress" parameterType="AddressCustom" resultType="Address">
+SELECT * FROM address 
+<where>
+	<include refid="query_address_by_address_id"></include>
+	<include refid="query_address_by_user_id"></include>
+	<include refid="query_address_by_consignee_name"></include>
+	<include refid="query_address_by_phone_number"></include>
+	<include refid="query_address_by_province"></include>
+	<include refid="query_address_by_city"></include>
+	<include refid="query_address_by_detail_address"></include>
+	<include refid="query_address_by_default_address"></include>
+</where>
 </select>
 
-<select id="findAddressById" parameterType="String" resultType="Address">
-SELECT * FROM address WHERE id = #{id}
-</select>
 
 <insert id="insertShippingAddress" parameterType="Address">
-INSERT INTO address(id,username,consignee_name,phone_number,province,city,detail_address) 
-VALUES (#{id},#{username},#{consignee_name},#{phone_number},#{province},#{city},#{detail_address});
+INSERT INTO address(address_id,user_id,consignee_name,phone_number,province,city,detail_address,default_address) 
+VALUES (#{address_id},#{user_id},#{consignee_name},#{phone_number},#{province},#{city},#{detail_address},#{default_address});
 </insert>
 
+
 <update id="updateShippingAddress" parameterType="Address">
-UPDATE address SET consignee_name=#{consignee_name},
+UPDATE address SET user_id=#{user_id},
+					consignee_name=#{consignee_name},
 					phone_number=#{phone_number},
 					province=#{province},
 					city=#{city},
 					detail_address=#{detail_address} 
-WHERE id=#{id}
+WHERE address_id=#{address_id}
+</update>
+
+<update id="setDefaultShippingAddress" parameterType="Address">
+UPDATE address SET default_address=#{default_address} 
+WHERE address_id=#{address_id}
 </update>
 
 
