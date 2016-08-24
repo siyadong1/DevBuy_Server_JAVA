@@ -2,6 +2,7 @@ package com.dev4free.devbuy.controller;
 
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,16 +22,33 @@ import com.dev4free.devbuy.utils.TextUtils;
 import com.dev4free.devbuy.utils.UUIDUtils;
 import com.dev4free.devbuy.utils.customObjectUtils;
 
+
+/**
+ * 
+ * @author lzw
+ * @date:2016年8月21日
+ * @project_name:devbuy
+ * @description:AddressController这个类对于数据库中address这张表
+ */
+
 @Controller
 @RequestMapping(value="/java/",method={RequestMethod.POST,RequestMethod.GET})
 public class AddressController {
 
+	//LOGGER用于打印日志，一般在调试的时候打印DEBUG级别的日志
+	private static final Logger LOGGER = Logger.getLogger(CityController.class);
+	
 	@Autowired
 	AddressService addressService;
 	
 	@Autowired
 	UserService userservice;
 	
+	/**
+	 * 根据用户登录账号查找收货地址
+	 * @param addressCustom
+	 * @return
+	 */
 	@RequestMapping(value="/findAddressByUserName")
 	private @ResponseBody ResponseMessage findAddressByUserName(AddressCustom addressCustom){
 		
@@ -44,6 +62,7 @@ public class AddressController {
 			return responseMessage;
 		}
 		
+		//根据username查找对应的user_id
 		User user = userservice.findUserByUsername(addressCustom.getUsername());
 		
 		if(user==null){
@@ -69,6 +88,11 @@ public class AddressController {
 		
 	}
 	
+	/**
+	 * 插入用户收货地址
+	 * @param addressCustom
+	 * @return
+	 */
 	@RequestMapping(value="/insertShippingAddress")
 	private @ResponseBody ResponseMessage insertShippingAddress(AddressCustom addressCustom){
 		
@@ -81,6 +105,7 @@ public class AddressController {
 			return responseMessage;
 		}
 		
+		//根据username查找对应的user_id
 		User user = userservice.findUserByUsername(addressCustom.getUsername());
 		
 		if(user==null){
@@ -90,6 +115,7 @@ public class AddressController {
 		}
 		
 		String user_id = user.getUser_id();
+		
 		
 		AddressCustom addr1 = new AddressCustom();
 		addr1.setUser_id(user_id);
@@ -115,6 +141,11 @@ public class AddressController {
 		
 	}
 	
+	/**
+	 * 更新用户收货地址
+	 * @param addressCustom
+	 * @return
+	 */
 	@RequestMapping(value="/updateShippingAddress")
 	private @ResponseBody ResponseMessage updateShippingAddress(AddressCustom addressCustom){
 		
@@ -133,6 +164,7 @@ public class AddressController {
 			return responseMessage;
 		}
 		
+		//判断传入address_id对应的收货地址是否存在
 		AddressCustom addr1 = new AddressCustom();
 		addr1.setAddress_id(addressCustom.getAddress_id());
 		
@@ -150,12 +182,18 @@ public class AddressController {
 		BeanUtils.copyProperties(addressCustom, address);
 		address.setUser_id(user.getUser_id());
 		
+		//更新收货地址
 		addressService.updateShippingAddress(address);
 		
 		return responseMessage;
 		
 	}
 	
+	/**
+	 * 设置默认收货地址
+	 * @param addressCustom
+	 * @return
+	 */
 	@RequestMapping(value="/setDefaultShippingAddress")
 	private @ResponseBody ResponseMessage setDefaultShippingAddress(AddressCustom addressCustom){
 		
@@ -179,6 +217,7 @@ public class AddressController {
 		
 		String user_id = user.getUser_id();
 		
+		//查找该用户对应的默认地址，temp==null表示还没有指定默认地址
 		AddressCustom addr1 = new AddressCustom();
 		addr1.setUser_id(user_id);
 		addr1.setDefault_address("true");
@@ -188,6 +227,7 @@ public class AddressController {
 		Address address = new Address();
 		BeanUtils.copyProperties(addressCustom, address);
 
+		
 		if(temp!=null){
 			Address address1 = new Address();
 			address1.setAddress_id(temp.get(0).getAddress_id());

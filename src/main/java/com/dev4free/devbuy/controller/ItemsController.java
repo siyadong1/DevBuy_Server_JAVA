@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,13 +20,30 @@ import com.dev4free.devbuy.po.Items;
 import com.dev4free.devbuy.service.ItemsService;
 import com.dev4free.devbuy.utils.UUIDUtils;
 
+/**
+ * 
+ * @author lzw
+ * @date:2016年8月21日
+ * @project_name:devbuy
+ * @description:ItemsController这个类对于数据库中items这张表
+ */
 @Controller
 @RequestMapping(value="/java/",method={RequestMethod.GET,RequestMethod.POST})
 public class ItemsController {
 
+	//LOGGER用于打印日志，一般在调试的时候打印DEBUG级别的日志
+	private static final Logger LOGGER = Logger.getLogger(CityController.class);
+	
 	@Autowired
 	ItemsService itemsService;
 	
+	
+	/**
+	 * 在数据表items中插入商品详情，包括上传商品图片
+	 * @param items
+	 * @param itemspic
+	 * @return
+	 */
 	@RequestMapping(value="/insertItems")
 	public @ResponseBody ResponseMessage insertItems(Items items,MultipartFile itemspic){
 		
