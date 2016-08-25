@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.dev4free.devbuy.constant.Constant;
 import com.dev4free.devbuy.constant.ConstantResponse;
 import com.dev4free.devbuy.entity.ResponseMessage;
 import com.dev4free.devbuy.po.Items;
 import com.dev4free.devbuy.service.ItemsService;
+import com.dev4free.devbuy.utils.TextUtils;
 import com.dev4free.devbuy.utils.UUIDUtils;
 
 /**
@@ -49,6 +52,7 @@ public class ItemsController {
 		
 		ResponseMessage responseMessage = new ResponseMessage();
 		
+		//对传入的参数进行校验
 		if(items == null || itemspic == null){
 			responseMessage.setCode(ConstantResponse.CODE_PARAMETER_EMPTY);
 			responseMessage.setContent(ConstantResponse.CONTENT_PARAMETER_EMPTY);
@@ -88,6 +92,33 @@ public class ItemsController {
 		
 		items.setItems_id(UUIDUtils.getId());
 		itemsService.insertItems(items);
+		
+		return responseMessage;
+		
+	}
+	
+	@RequestMapping(value="/findItemsByItemsId")
+	private @ResponseBody ResponseMessage findItemsByItemsId(String items_id){
+		
+		//返回移动端的数据
+		ResponseMessage responseMessage = new ResponseMessage();
+		
+		//对传入的参数进行校验
+		if(TextUtils.isEmpty(items_id)){
+			responseMessage.setCode(ConstantResponse.CODE_PARAMETER_EMPTY);
+			responseMessage.setContent(ConstantResponse.CONTENT_PARAMETER_EMPTY);
+			return responseMessage;
+		}
+		
+		Items items = itemsService.findItemsByItemsId(items_id);
+		
+		if(items==null){
+			responseMessage.setCode(ConstantResponse.CODE_ITEMS_NOEXISTS);
+			responseMessage.setContent(ConstantResponse.CONTENT_ITEMS_NOEXISTS);
+			return responseMessage;
+		}
+		
+		responseMessage.setContent(JSON.toJSON(items));
 		
 		return responseMessage;
 		

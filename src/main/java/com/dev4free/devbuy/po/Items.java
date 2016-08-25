@@ -1,5 +1,10 @@
 package com.dev4free.devbuy.po;
 
+/**
+ * items这张表对象的实体类
+ * @author lzw
+ *
+ */
 public class Items {
 	
 	//Items类的属性对于items表的列名

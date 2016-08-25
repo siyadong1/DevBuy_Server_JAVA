@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.dev4free.devbuy.mapper.OrderDetailMapper">
+
+<insert id="insertOrderDetailRecord" parameterType="OrderDetail">
+INSERT INTO orderdetail(details_id,orders_id,items_id,items_num) 
+VALUES (#{details_id},#{orders_id},#{items_id},#{items_num})
+</insert>
+
+
+
+</mapper>

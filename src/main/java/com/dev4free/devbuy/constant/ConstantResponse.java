@@ -12,7 +12,6 @@ public class ConstantResponse {
 	public static final String CONTENT_PARAMETER_EMPTY = "输入参数为空！";
 	
 	
-	
 	public static final String CODE_USER_EXISTS = "0000002";
 	public static final String CONTENT_USER_EXISTS = "该商户已经注册！";
 	
@@ -40,6 +39,25 @@ public class ConstantResponse {
 	public static final String CODE_SHIPPINGADDRESS_EMPTY = "0000008";
 	public static final String CONTENT_SHIPPINGADDRESS_EMPTY = "收货地址不完整";
 	
+	
+	public static final String CODE_ITEMS_NOEXISTS = "0000009";
+	public static final String CONTENT_ITEMS_NOEXISTS = "商品不存在";
+	
+	
+	public static final String CODE_SHOPPINGCARTRECORD_NOEXISTS = "0000010";
+	public static final String CONTENT_SHOPPINGCARTRECORD_NOEXISTS = "该记录不存在";
+	
+	
+	public static final String CODE_ITMES_INVENTORY_ERROR = "0000011";
+	public static final String CONTENT_ITMES_INVENTORY_ERROR = "商品库存量不足";
+	
+	
+	public static final String CODE_ITMES_SALESVOLUME_ERROR = "0000012";
+	public static final String CONTENT_ITMES_SALESVOLUME_ERROR = "商品销量错误";
+	
+	
+	public static final String CODE_ORDERS_NOEXISTS = "0000013";
+	public static final String CONTENT_ORDERS_NOEXISTS = "订单不存在";
 	
 	
 }

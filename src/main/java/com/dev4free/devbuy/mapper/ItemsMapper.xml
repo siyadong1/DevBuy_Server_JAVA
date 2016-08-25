@@ -3,11 +3,32 @@
 
 <mapper namespace="com.dev4free.devbuy.mapper.ItemsMapper">
 
+
 <insert id="insertItems" parameterType="Items">
-
-INSERT INTO items(items_id,itemsname,description,category,items_lb,price,image,inventory,sales_volume,area) 
-VALUES (#{items_id},#{itemsname},#{description},#{category},#{items_lb},#{price},#{image},#{inventory},#{sales_volume},#{area});
-
+INSERT INTO items(items_id,itemsname,description,category,items_lb,price,image,inventory,sales_volume,area,express_fee) 
+VALUES (#{items_id},#{itemsname},#{description},#{category},#{items_lb},#{price},#{image},#{inventory},#{sales_volume},#{area},#{express_fee});
 </insert>
+
+<select id="findItemsByItemsId" parameterType="String" resultType="Items">
+SELECT * FROM items WHERE items_id=#{items_id};
+</select>
+
+<update id="updateItemsByItemsId" parameterType="Items">
+UPDATE items 
+<set>
+<if test="itemsname!=null and itemsname!=''">itemsname=#{itemsname},</if>
+<if test="description!=null and description!=''">description=#{description},</if>
+<if test="category!=null and category!=''">category=#{category},</if>
+<if test="items_lb!=null and items_lb!=''">items_lb=#{items_lb},</if>
+<if test="price!=null and price!=''">price=#{price},</if>
+<if test="image!=null and image!=''">image=#{image},</if>
+<if test="inventory!=null and inventory!=''">inventory=#{inventory},</if>
+<if test="sales_volume!=null and sales_volume!=''">sales_volume=#{sales_volume},</if>
+<if test="area!=null and area!=''">area=#{area},</if>
+<if test="express_fee!=null and express_fee!=''">express_fee=#{express_fee},</if>
+</set>
+WHERE items_id=#{items_id}
+</update>
+
 
 </mapper>

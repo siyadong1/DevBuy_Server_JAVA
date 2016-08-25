@@ -81,14 +81,16 @@ UPDATE address SET user_id=#{user_id},
 					phone_number=#{phone_number},
 					province=#{province},
 					city=#{city},
-					detail_address=#{detail_address} 
+					detail_address=#{detail_address},
+					default_address=#{default_address} 
 WHERE address_id=#{address_id}
 </update>
 
-<update id="setDefaultShippingAddress" parameterType="Address">
-UPDATE address SET default_address=#{default_address} 
+
+<delete id="deleteShippingAddress" parameterType="String">
+DELETE FROM address 
 WHERE address_id=#{address_id}
-</update>
+</delete>
 
 
 </mapper>

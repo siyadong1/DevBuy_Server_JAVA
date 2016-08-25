@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.dev4free.devbuy.mapper.ShoppingCartMapper">
+
+<sql id="query_record_by_cart_id">
+<if test="cart_id!=null and cart_id!=''">
+	and cart_id = #{cart_id}
+</if>
+</sql>
+
+<sql id="query_record_by_user_id">
+<if test="user_id!=null and user_id!=''">
+	and user_id = #{user_id}
+</if>
+</sql>
+
+<sql id="query_record_by_items_id">
+<if test="items_id!=null and items_id!=''">
+	and items_id = #{items_id}
+</if>
+</sql>
+
+<sql id="query_record_by_items_num">
+<if test="items_num!=null and items_num!=''">
+	and items_num = #{items_num}
+</if>
+</sql>
+
+<select id="findShoppingCartRecordByShoppingCartRecord" parameterType="ShoppingCartRecord" resultType="ShoppingCartRecord">
+SELECT * FROM shoppingcart_record 
+<where>
+	<include refid="query_record_by_cart_id"></include>
+	<include refid="query_record_by_user_id"></include>
+	<include refid="query_record_by_items_id"></include>
+	<include refid="query_record_by_items_num"></include>
+</where>
+</select>
+
+<select id="findShoppingCartRecordByCartId" parameterType="ShoppingCartRecord" resultType="ShoppingCartRecord">
+SELECT * FROM shoppingcart_record 
+<where>
+	<include refid="query_record_by_cart_id"></include>
+</where>
+</select>
+
+
+<!-- 更新购物车商品数量 -->
+<update id="updateItemsNumByCartId" parameterType="ShoppingCartRecord">
+UPDATE shoppingcart_record SET items_num=#{items_num} 
+WHERE cart_id=#{cart_id}
+</update>
+
+<!-- 添加新的商品到购物车 -->
+<insert id="insertShoppingCartRecordByShoppingCartRecord" parameterType="ShoppingCartRecord">
+INSERT INTO shoppingcart_record(cart_id,user_id,items_id,items_num) 
+VALUES (#{cart_id},#{user_id},#{items_id},#{items_num});
+</insert>
+
+<delete id="deleteItemsFromShoppingCart" parameterType="String">
+DELETE FROM shoppingcart_record 
+WHERE cart_id=#{cart_id}
+</delete>
+
+
+<select id="findShoppingCartDetailsByUserId" parameterType="String" resultType="UserShoppingCart">
+SELECT items.itemsname, items.description, items.price,items.image,shoppingcart_record.items_num 
+FROM shoppingcart_record,items 
+WHERE shoppingcart_record.user_id=#{user_id} AND items.items_id=shoppingcart_record.items_id
+</select>
+
+
+
+</mapper>

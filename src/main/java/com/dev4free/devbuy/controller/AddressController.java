@@ -49,7 +49,7 @@ public class AddressController {
 	 * @param addressCustom
 	 * @return
 	 */
-	@RequestMapping(value="/findAddressByUserName")
+	@RequestMapping(value="/findAddressByUserName") //传入参数username,default_address(不是必选)
 	private @ResponseBody ResponseMessage findAddressByUserName(AddressCustom addressCustom){
 		
 		//返回给移动端的数据
@@ -76,7 +76,7 @@ public class AddressController {
 		
 		ArrayList<Address> address = addressService.findAddressByAddress(addressCustom);
 		
-		if(address==null){
+		if(address.size()==0){
 			responseMessage.setCode(ConstantResponse.CODE_SHIPPINGADDRESS_NOEXISTS);
 			responseMessage.setContent(ConstantResponse.CONTENT_SHIPPINGADDRESS_NOEXISTS);
 			return responseMessage;			
@@ -127,14 +127,14 @@ public class AddressController {
 		BeanUtils.copyProperties(addressCustom, address);
 		address.setUser_id(user_id);
 		
-		if(temp!=null){
+		if(temp.size()!=0){
 			address.setDefault_address(null);
 		}
-		else if(temp==null){
+		else if(temp.size()==0){
 			address.setDefault_address("true");
 		}
 		
-		address.setAddress_id(UUIDUtils.getId());; //传入参数中不包括id项
+		address.setAddress_id(UUIDUtils.getId()); //传入参数中不包括id项
 		addressService.insertShippingAddress(address);
 		
 		return responseMessage;
@@ -142,11 +142,11 @@ public class AddressController {
 	}
 	
 	/**
-	 * 更新用户收货地址
+	 * 修改用户收货地址
 	 * @param addressCustom
 	 * @return
 	 */
-	@RequestMapping(value="/updateShippingAddress")
+	@RequestMapping(value="/updateShippingAddress") //传入参数username,address_id
 	private @ResponseBody ResponseMessage updateShippingAddress(AddressCustom addressCustom){
 		
 		//返回给移动端的数据
@@ -157,27 +157,56 @@ public class AddressController {
 			responseMessage.setContent(ConstantResponse.CONTENT_SHIPPINGADDRESS_EMPTY);
 			return responseMessage;
 		}
-		
-		if(TextUtils.isEmpty(addressCustom.getAddress_id())){
+		String address_id = addressCustom.getAddress_id();
+		if(TextUtils.isEmpty(address_id)){
 			responseMessage.setCode(ConstantResponse.CODE_SHIPPINGADDRESS_NOEXISTS);
 			responseMessage.setContent(ConstantResponse.CONTENT_SHIPPINGADDRESS_NOEXISTS);
 			return responseMessage;
 		}
 		
-		//判断传入address_id对应的收货地址是否存在
+		//根据username查找对应的user_id
+		User user = userservice.findUserByUsername(addressCustom.getUsername());
+		
+		if(user==null){
+			responseMessage.setCode(ConstantResponse.CODE_USER_NOEXISTS);
+			responseMessage.setContent(ConstantResponse.CONTENT_USER_NOEXISTS);
+			return responseMessage;
+		}
+		String user_id = user.getUser_id();
+		
+		//判断传入address_id对应的收货地址是否存在,若存在，判断是否是username对应用户的收货地址
 		AddressCustom addr1 = new AddressCustom();
-		addr1.setAddress_id(addressCustom.getAddress_id());
+		addr1.setAddress_id(address_id);
 		
 		ArrayList<Address> temp = addressService.findAddressByAddress(addr1);
 		
-		if(temp==null){
+		if(temp.size()==0 || !temp.get(0).getUser_id().equals(user_id)){
 			responseMessage.setCode(ConstantResponse.CODE_SHIPPINGADDRESS_NOEXISTS);
 			responseMessage.setContent(ConstantResponse.CONTENT_SHIPPINGADDRESS_NOEXISTS);
 			return responseMessage;
 		}
+
 		
-		User user = userservice.findUserByUsername(addressCustom.getUsername());
-		
+		//传入参数default_address=="true"表示，要将此地址设置为默认收货地址
+		//首先判断该用户是否已经设置了默认地址
+		//若已经设置，将原来的默认地址的efault_address设置为false
+		if(addressCustom.getDefault_address().equals("true")){
+			
+			AddressCustom addr2 = new AddressCustom();
+			addr2.setUser_id(user_id);
+			addr2.setDefault_address("true");
+			ArrayList<Address> temp1 = addressService.findAddressByAddress(addr2);
+			
+			if(temp1.size()!=0){
+				//已经设置默认地址
+				Address addr3 = temp1.get(0) ;
+				if(!addr3.getAddress_id().equals(address_id)){
+					addr3.setDefault_address(null);
+					addressService.updateShippingAddress(addr3);
+				}
+			}
+		}
+
 		Address address = new Address();
 		BeanUtils.copyProperties(addressCustom, address);
 		address.setUser_id(user.getUser_id());
@@ -189,57 +218,56 @@ public class AddressController {
 		
 	}
 	
+	
 	/**
-	 * 设置默认收货地址
-	 * @param addressCustom
+	 * 删除收货地址
+	 * @param username
+	 * @param address_id
 	 * @return
 	 */
-	@RequestMapping(value="/setDefaultShippingAddress")
-	private @ResponseBody ResponseMessage setDefaultShippingAddress(AddressCustom addressCustom){
+	@RequestMapping(value="/deleteShippingAddress")
+	private @ResponseBody ResponseMessage deleteShippingAddress(String username,String address_id){
 		
 		//返回给移动端的数据
 		ResponseMessage responseMessage = new ResponseMessage();
 		
-		if(addressCustom==null||TextUtils.isEmpty(addressCustom.getAddress_id())||TextUtils.isEmpty(addressCustom.getUsername())){
+		//对传入的参数进行校验
+		if(TextUtils.isEmpty(username)||TextUtils.isEmpty(address_id)){
 			responseMessage.setCode(ConstantResponse.CODE_PARAMETER_EMPTY);
 			responseMessage.setContent(ConstantResponse.CONTENT_PARAMETER_EMPTY);
 			return responseMessage;
 		}
 		
-		//判断该用户是否已经设置了默认地址
-		User user = userservice.findUserByUsername(addressCustom.getUsername());
-		
+		//传入的用户名是否存在
+		User user = userservice.findUserByUsername(username);
+				
 		if(user==null){
 			responseMessage.setCode(ConstantResponse.CODE_USER_NOEXISTS);
 			responseMessage.setContent(ConstantResponse.CONTENT_USER_NOEXISTS);
 			return responseMessage;
 		}
 		
-		String user_id = user.getUser_id();
-		
-		//查找该用户对应的默认地址，temp==null表示还没有指定默认地址
+		//传入的address_id是否为username对应用户的收货地址
 		AddressCustom addr1 = new AddressCustom();
-		addr1.setUser_id(user_id);
-		addr1.setDefault_address("true");
-		
+		addr1.setAddress_id(address_id);
 		ArrayList<Address> temp = addressService.findAddressByAddress(addr1);
 		
-		Address address = new Address();
-		BeanUtils.copyProperties(addressCustom, address);
-
-		
-		if(temp!=null){
-			Address address1 = new Address();
-			address1.setAddress_id(temp.get(0).getAddress_id());
-			address1.setDefault_address(null);
-			addressService.setDefaultShippingAddress(address1);
+		if(temp.size()==0){
+			responseMessage.setCode(ConstantResponse.CODE_SHIPPINGADDRESS_NOEXISTS);
+			responseMessage.setContent(ConstantResponse.CONTENT_SHIPPINGADDRESS_NOEXISTS);
+			return responseMessage;
+		}else if(temp.size()!=0){
+			String ss = temp.get(0).getAddress_id();
+			if(!ss.equals(address_id)){
+				responseMessage.setCode(ConstantResponse.CODE_SHIPPINGADDRESS_NOEXISTS);
+				responseMessage.setContent(ConstantResponse.CONTENT_SHIPPINGADDRESS_NOEXISTS);
+				return responseMessage;
+			}
 		}
 		
-		address.setDefault_address("true");
-		addressService.setDefaultShippingAddress(address);
+		addressService.deleteShippingAddress(address_id);
 		
 		return responseMessage;
-		
 	}
 	
 	

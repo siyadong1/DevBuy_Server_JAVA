@@ -9,4 +9,18 @@ public interface ItemsMapper {
 	 * @param items
 	 */
 	public void insertItems(Items items);
+	
+	
+	/**
+	 * 根据商品id查询商品信息详情
+	 * @param items_id
+	 * @return
+	 */
+	public Items findItemsByItemsId(String items_id);
+	
+	/**
+	 * 更新商品信息
+	 * @param items
+	 */
+	public void updateItemsByItemsId(Items items);
 }

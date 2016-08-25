@@ -29,10 +29,10 @@ public interface AddressService {
 	public void updateShippingAddress(Address address);
 	
 	/**
-	 * 设置默认收货地址
-	 * @param address
+	 * 删除收货地址
+	 * @param address_id
 	 */
-	public void setDefaultShippingAddress(Address address);
+	public void deleteShippingAddress(String address_id);
 	
 	
 }
