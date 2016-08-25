@@ -70,7 +70,7 @@ public class AddressController {
 			responseMessage.setContent(ConstantResponse.CONTENT_USER_NOEXISTS);
 			return responseMessage;
 		}
-		
+
 		String user_id = user.getUser_id(); //移动端传入的是username，但address表外键是user_id
 		addressCustom.setUser_id(user_id);
 		
@@ -119,7 +119,7 @@ public class AddressController {
 		
 		AddressCustom addr1 = new AddressCustom();
 		addr1.setUser_id(user_id);
-		addr1.setDefault_address("true");
+		addr1.setDefault_address("0");
 		
 		ArrayList<Address> temp = addressService.findAddressByAddress(addr1);
 		
@@ -131,7 +131,7 @@ public class AddressController {
 			address.setDefault_address(null);
 		}
 		else if(temp.size()==0){
-			address.setDefault_address("true");
+			address.setDefault_address("0");
 		}
 		
 		address.setAddress_id(UUIDUtils.getId()); //传入参数中不包括id项
@@ -187,14 +187,14 @@ public class AddressController {
 		}
 
 		
-		//传入参数default_address=="true"表示，要将此地址设置为默认收货地址
+		//传入参数default_address=="0"表示，要将此地址设置为默认收货地址
 		//首先判断该用户是否已经设置了默认地址
-		//若已经设置，将原来的默认地址的efault_address设置为false
-		if(addressCustom.getDefault_address().equals("true")){
+		//若已经设置，将原来的默认地址的efault_address设置为null
+		if(addressCustom.getDefault_address().equals("0")){
 			
 			AddressCustom addr2 = new AddressCustom();
 			addr2.setUser_id(user_id);
-			addr2.setDefault_address("true");
+			addr2.setDefault_address("0");
 			ArrayList<Address> temp1 = addressService.findAddressByAddress(addr2);
 			
 			if(temp1.size()!=0){
