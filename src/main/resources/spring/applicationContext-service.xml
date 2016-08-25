@@ -23,4 +23,13 @@
 <bean id="ItemsService" class="com.dev4free.devbuy.serviceImp.ItemsServiceImpl">
 </bean>
 
+<bean id="ShoppingCartService" class="com.dev4free.devbuy.serviceImp.ShoppingCartServiceImpl">
+</bean>
+
+<bean id="OrderDetailService" class="com.dev4free.devbuy.serviceImp.OrderDetailServiceImpl">
+</bean>
+
+<bean id="OrdersService" class="com.dev4free.devbuy.serviceImp.OrdersServiceImpl">
+</bean>
+
 </beans>

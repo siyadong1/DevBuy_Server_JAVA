@@ -41,12 +41,14 @@ public class AddressServiceImpl implements AddressService {
 		addressMapper.updateShippingAddress(address);
 	}
 
+	
 	/**
-	 * 设置默认收货地址
+	 * 删除收货地址
+	 * @param address_id
 	 */
-	public void setDefaultShippingAddress(Address address){
+	public void deleteShippingAddress(String address_id){
 		
-		addressMapper.setDefaultShippingAddress(address);
+		addressMapper.deleteShippingAddress(address_id);
 	}
 
 }

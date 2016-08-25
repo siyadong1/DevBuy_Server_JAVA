@@ -10,7 +10,7 @@
     		<h2>对于items表单的数据录入</h2>	
     		
 		<form id="itemForm"
-		action="http://www.dev4free.com/devbuy/java/insertItems.action"
+		action="http://localhost:8080/devbuy/java/insertItems.action"
 		method="post" enctype="multipart/form-data">
 			<tr>
 				<td>显示名称</td>
