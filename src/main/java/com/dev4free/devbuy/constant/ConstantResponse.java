@@ -7,7 +7,6 @@ package com.dev4free.devbuy.constant;
  */
 public class ConstantResponse {
 
-	
 	public static final String CODE_PARAMETER_EMPTY = "0000001";
 	public static final String CONTENT_PARAMETER_EMPTY = "输入参数为空！";
 	
@@ -76,7 +75,7 @@ public class ConstantResponse {
 	public static final String CONTENT_WALLET_ERROR = "钱包余额不足";
 	
 	
-	public static final String CODE_INPUT_PARAMETER_ERROR = "0000018";
-	public static final String CONTENT_INPUT_PARAMETER_ERROR = "输入参数错误";
+	public static final String CODE_ORDERS_STATE_ERROR = "0000018";
+	public static final String CONTENT_ORDERS_STATE_ERROR = "订单状态错误";
 	
 }

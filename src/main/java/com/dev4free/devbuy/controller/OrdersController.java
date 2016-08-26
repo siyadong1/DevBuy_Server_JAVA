@@ -32,6 +32,7 @@ import com.dev4free.devbuy.service.WalletService;
 import com.dev4free.devbuy.utils.TextUtils;
 import com.dev4free.devbuy.utils.TimeUtils;
 import com.dev4free.devbuy.utils.UUIDUtils;
+import com.dev4free.devbuy.utils.customObjectUtils;
 
 /**
  * 订单模块相关操作
@@ -57,8 +58,8 @@ public class OrdersController {
 	@Autowired
 	OrdersService ordersService;
 	
-//	@Autowired
-//	WalletService walletService;
+	@Autowired
+	WalletService walletService;
 	
 	/**
 	 * 提交订单
@@ -242,42 +243,48 @@ public class OrdersController {
 	 * @return
 	 */
 	@RequestMapping(value="/cancelOrdersByOrdersId")
-	public @ResponseBody ResponseMessage cancelOrdersByOrdersId(String orders_id){
+	public @ResponseBody ResponseMessage cancelOrdersByOrdersId(String username,String orders_id){
 		
 		ResponseMessage responseMessage = new ResponseMessage();
 		
 		//对传入的参数进行校验
-		if(TextUtils.isEmpty(orders_id)){
+		if(TextUtils.isEmpty(username)||TextUtils.isEmpty(orders_id)){
 			responseMessage.setCode(ConstantResponse.CODE_PARAMETER_EMPTY);
 			responseMessage.setContent(ConstantResponse.CONTENT_PARAMETER_EMPTY);
 			return responseMessage;
 		}
 		
-		//根据orders_id查询订单
+		//根据username查找对应的user_id
+		User user = userService.findUserByUsername(username);
 		
+		if(user==null){
+			responseMessage.setCode(ConstantResponse.CODE_USER_NOEXISTS);
+			responseMessage.setContent(ConstantResponse.CONTENT_USER_NOEXISTS);
+			return responseMessage;
+		}
+		String user_id = user.getUser_id();
+		
+		//根据orders_id查询订单
 		OrdersCustom ordersCustoms = ordersService.findOrdersByOrdersId(orders_id);
 
-		if(ordersCustoms==null){
+		if(ordersCustoms==null||customObjectUtils.isOrdersCustomEmpty(ordersCustoms)||!ordersCustoms.getUser_id().equals(user_id)){
 			responseMessage.setCode(ConstantResponse.CODE_ORDERS_NOEXISTS);
 			responseMessage.setContent(ConstantResponse.CONTENT_ORDERS_NOEXISTS);
 			return responseMessage;
 		}
 		
-		//根据当前订单的状态决定
-		if(ordersCustoms.getState().equals("4")){
-			//state=4说明订单已经是取消状态
+		//判断订单能否取消
+		if(!customObjectUtils.isOrdersCancelable(ordersCustoms)){
+			//不能取消说明订单状态不符合
+			responseMessage.setCode(ConstantResponse.CODE_ORDERS_STATE_ERROR);
+			responseMessage.setContent(ConstantResponse.CONTENT_ORDERS_STATE_ERROR);
 			return responseMessage;
 		}
-		
-		//如果订单已付款完成，取消时需要进行退款
-		
-		
-		
+
 		//取出订单中的items的items_id和items_num,更新商品inventory和sales_volume信息
 		Iterator<OrderDetailCustom> iterator = (ordersCustoms.getOrderDetailCustom()).iterator();
 		
 		while(iterator.hasNext()){
-
 			OrderDetailCustom orderDetailCustom = iterator.next();
 
 			String items_id = orderDetailCustom.getItems_id();
@@ -292,7 +299,6 @@ public class OrdersController {
 
 			Items temp_items = new Items(); //没有变动的项不更新
 			temp_items.setItems_id(items_id);
-			
 			
 			//库存量
 			String inventory = items.getInventory();
@@ -321,7 +327,26 @@ public class OrdersController {
 			
 			//更新商品库存量和销量
 			itemsService.updateItemsByItemsId(temp_items);
+		}
 		
+		//判断订单是否已支付，已支付需要退款
+		if(customObjectUtils.isOrdersPaid(ordersCustoms.getState())){
+			String sum = ordersCustoms.getSum();
+			
+			//根据user_id取用户钱包信息
+			Wallet wallet = walletService.findWalletBalance(user_id);
+			
+			if(wallet==null||TextUtils.isEmpty(wallet.getBalance())){
+				wallet = new Wallet();
+				wallet.setWallet_id(UUIDUtils.getId());
+				wallet.setUser_id(user_id);
+				wallet.setBalance(sum);
+				walletService.insertWalletBalance(wallet);
+			}
+			//退款操作
+			double newBalance =Double.parseDouble(wallet.getBalance())+Double.parseDouble(sum);
+			wallet.setBalance(((Double)newBalance).toString());
+			walletService.updateWalletBalance(wallet);
 		}
 		
 		String state = "4"; //订单状态更改为已取消
@@ -342,28 +367,38 @@ public class OrdersController {
 	 * @return
 	 */
 	@RequestMapping(value="/payForOrdersByOrdersId")
-	public @ResponseBody ResponseMessage payForOrdersByOrdersId(String orders_id){
+	public @ResponseBody ResponseMessage payForOrdersByOrdersId(String username,String orders_id){
 		
 		ResponseMessage responseMessage = new ResponseMessage();
 		
 		//对传入的参数进行校验
-		if(TextUtils.isEmpty(orders_id)){
+		if(TextUtils.isEmpty(username)||TextUtils.isEmpty(orders_id)){
 			responseMessage.setCode(ConstantResponse.CODE_PARAMETER_EMPTY);
 			responseMessage.setContent(ConstantResponse.CONTENT_PARAMETER_EMPTY);
 			return responseMessage;
 		}
 		
-		//根据orders_id查询订单
+		//根据username查找对应的user_id
+		User user = userService.findUserByUsername(username);
 		
+		if(user==null){
+			responseMessage.setCode(ConstantResponse.CODE_USER_NOEXISTS);
+			responseMessage.setContent(ConstantResponse.CONTENT_USER_NOEXISTS);
+			return responseMessage;
+		}
+		String user_id = user.getUser_id();
+		
+		
+		//根据orders_id查询订单
 		OrdersCustom ordersCustoms = ordersService.findOrdersByOrdersId(orders_id);
 
-		if(ordersCustoms==null){
+		if(ordersCustoms==null||!ordersCustoms.getUser_id().equals(user_id)){
 			responseMessage.setCode(ConstantResponse.CODE_ORDERS_NOEXISTS);
 			responseMessage.setContent(ConstantResponse.CONTENT_ORDERS_NOEXISTS);
 			return responseMessage;
 		}
 		
-		//根据当前订单的状态决定
+		//根据当前订单的状态进行处理
 		if(ordersCustoms.getState().equals("1")||ordersCustoms.getState().equals("2")||ordersCustoms.getState().equals("3")){
 			responseMessage.setCode(ConstantResponse.CODE_ORDERS_PAYMENT_COMPLETED);
 			responseMessage.setContent(ConstantResponse.CONTENT_ORDERS_PAYMENT_COMPLETED);
@@ -384,25 +419,33 @@ public class OrdersController {
 				return responseMessage;
 			}
 			
-////			Wallet wallet = walletService.findWalletBalance(ordersCustoms.getUser_id());
-//			
-//			double temp_sum = Double.parseDouble(sum); //待支付金额
-//			double temp_balance = Double.parseDouble(wallet.getBalance()); //钱包余额
-//			
-//			if(temp_sum>temp_balance){
-//				responseMessage.setCode(ConstantResponse.CODE_WALLET_ERROR);
-//				responseMessage.setContent(ConstantResponse.CONTENT_WALLET_ERROR);
-//				return responseMessage;
-//			}
-//			
-//			temp_balance = temp_balance-temp_sum;
-//			walletService.updateWalletBalance(ordersCustoms.getUser_id());
-//			
-//			return responseMessage;
+			Wallet wallet = walletService.findWalletBalance(user_id);
+			
+			double temp_sum = Double.parseDouble(sum); //待支付金额
+			double temp_balance = Double.parseDouble(wallet.getBalance()); //钱包余额
+			
+			if(temp_sum>temp_balance){
+				responseMessage.setCode(ConstantResponse.CODE_WALLET_ERROR);
+				responseMessage.setContent(ConstantResponse.CONTENT_WALLET_ERROR);
+				return responseMessage;
+			}
+			
+			temp_balance = temp_balance-temp_sum;
+			wallet.setBalance(((Double)temp_balance).toString());
+			walletService.updateWalletBalance(wallet);
+			
+			//支付完成，更新订单状态
+			String state = "1"; //待发货
+			Orders orders = new Orders();
+			orders.setOrders_id(orders_id);
+			orders.setState(state);
+			
+			ordersService.updateOrdersRecordByOrdersId(orders);
+			return responseMessage;
 		}
 		
-		responseMessage.setCode(ConstantResponse.CODE_INPUT_PARAMETER_ERROR);
-		responseMessage.setContent(ConstantResponse.CONTENT_INPUT_PARAMETER_ERROR);
+		responseMessage.setCode(ConstantResponse.CODE_ORDERS_STATE_ERROR);
+		responseMessage.setContent(ConstantResponse.CONTENT_ORDERS_STATE_ERROR);
 		return responseMessage;
 	}
 	

@@ -43,6 +43,7 @@ WHERE orders_id=#{orders_id}
 
 <resultMap type="OrdersCustom" id="OrdersCustomMap">
 	<id column="orders_id" property="orders_id"/>
+	<result column="user_id" property="user_id"/>
 	<result column="sum" property="sum"/>
 	<result column="state" property="state"/>
 	
@@ -55,6 +56,7 @@ WHERE orders_id=#{orders_id}
 
 <select id="findOrdersByOrdersId" parameterType="String" resultMap="OrdersCustomMap">
 SELECT 
+orders.user_id,
 orders.sum,
 orders.state,
 orderdetail.items_id,
