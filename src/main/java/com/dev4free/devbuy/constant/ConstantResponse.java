@@ -70,4 +70,13 @@ public class ConstantResponse {
 	
 	public static final String CODE_ORDERS_INFO_ERROR = "0000016";
 	public static final String CONTENT_ORDERS_INFO_ERROR = "订单信息错误";
+	
+	
+	public static final String CODE_WALLET_ERROR = "0000017";
+	public static final String CONTENT_WALLET_ERROR = "钱包余额不足";
+	
+	
+	public static final String CODE_INPUT_PARAMETER_ERROR = "0000018";
+	public static final String CONTENT_INPUT_PARAMETER_ERROR = "输入参数错误";
+	
 }

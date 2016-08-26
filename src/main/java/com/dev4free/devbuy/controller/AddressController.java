@@ -156,17 +156,12 @@ public class AddressController {
 		//返回给移动端的数据
 		ResponseMessage responseMessage = new ResponseMessage();
 		
-		if(addressCustom==null||customObjectUtils.isAddressEmpty(addressCustom)){
+		if(addressCustom==null||TextUtils.isEmpty(addressCustom.getAddress_id())||customObjectUtils.isAddressEmpty(addressCustom)){
 			responseMessage.setCode(ConstantResponse.CODE_SHIPPINGADDRESS_EMPTY);
 			responseMessage.setContent(ConstantResponse.CONTENT_SHIPPINGADDRESS_EMPTY);
 			return responseMessage;
 		}
 		String address_id = addressCustom.getAddress_id();
-		if(TextUtils.isEmpty(address_id)){
-			responseMessage.setCode(ConstantResponse.CODE_SHIPPINGADDRESS_NOEXISTS);
-			responseMessage.setContent(ConstantResponse.CONTENT_SHIPPINGADDRESS_NOEXISTS);
-			return responseMessage;
-		}
 		
 		//根据username查找对应的user_id
 		User user = userservice.findUserByUsername(addressCustom.getUsername());

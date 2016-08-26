@@ -35,4 +35,7 @@
 <bean id="OrdersService" class="com.dev4free.devbuy.serviceImp.OrdersServiceImpl">
 </bean>
 
+<!-- <bean id="WalletService" class="com.dev4free.devbuy.serviceImp.WalletServiceImpl">
+</bean> -->
+
 </beans>

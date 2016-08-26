@@ -17,6 +17,7 @@ import com.dev4free.devbuy.po.Items;
 import com.dev4free.devbuy.po.OrderDetail;
 import com.dev4free.devbuy.po.Orders;
 import com.dev4free.devbuy.po.User;
+import com.dev4free.devbuy.po.Wallet;
 import com.dev4free.devbuy.po_custom.AddressCustom;
 import com.dev4free.devbuy.po_custom.ItemsCustom;
 import com.dev4free.devbuy.po_custom.ItemsIdAndNum;
@@ -27,6 +28,7 @@ import com.dev4free.devbuy.service.ItemsService;
 import com.dev4free.devbuy.service.OrderDetailService;
 import com.dev4free.devbuy.service.OrdersService;
 import com.dev4free.devbuy.service.UserService;
+import com.dev4free.devbuy.service.WalletService;
 import com.dev4free.devbuy.utils.TextUtils;
 import com.dev4free.devbuy.utils.TimeUtils;
 import com.dev4free.devbuy.utils.UUIDUtils;
@@ -41,7 +43,7 @@ import com.dev4free.devbuy.utils.UUIDUtils;
 public class OrdersController {
 	
 	@Autowired
-	UserService userservice;
+	UserService userService;
 	
 	@Autowired
 	AddressService addressService;
@@ -54,6 +56,9 @@ public class OrdersController {
 	
 	@Autowired
 	OrdersService ordersService;
+	
+//	@Autowired
+//	WalletService walletService;
 	
 	/**
 	 * 提交订单
@@ -76,7 +81,7 @@ public class OrdersController {
 		
 		
 		//根据username查找对应的user_id
-		User user = userservice.findUserByUsername(username);
+		User user = userService.findUserByUsername(username);
 		
 		if(user==null){
 			responseMessage.setCode(ConstantResponse.CODE_USER_NOEXISTS);
@@ -206,7 +211,7 @@ public class OrdersController {
 		}
 		
 		//根据username查找对应的user_id
-		User user = userservice.findUserByUsername(username);
+		User user = userService.findUserByUsername(username);
 		
 		if(user==null){
 			responseMessage.setCode(ConstantResponse.CODE_USER_NOEXISTS);
@@ -379,14 +384,25 @@ public class OrdersController {
 				return responseMessage;
 			}
 			
-			
-//			if(Double.parseDouble(sum)>)){
-//				
+////			Wallet wallet = walletService.findWalletBalance(ordersCustoms.getUser_id());
+//			
+//			double temp_sum = Double.parseDouble(sum); //待支付金额
+//			double temp_balance = Double.parseDouble(wallet.getBalance()); //钱包余额
+//			
+//			if(temp_sum>temp_balance){
+//				responseMessage.setCode(ConstantResponse.CODE_WALLET_ERROR);
+//				responseMessage.setContent(ConstantResponse.CONTENT_WALLET_ERROR);
+//				return responseMessage;
 //			}
-			
+//			
+//			temp_balance = temp_balance-temp_sum;
+//			walletService.updateWalletBalance(ordersCustoms.getUser_id());
+//			
+//			return responseMessage;
 		}
 		
-		
+		responseMessage.setCode(ConstantResponse.CODE_INPUT_PARAMETER_ERROR);
+		responseMessage.setContent(ConstantResponse.CONTENT_INPUT_PARAMETER_ERROR);
 		return responseMessage;
 	}
 	
