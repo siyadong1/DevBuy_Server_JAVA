@@ -264,6 +264,10 @@ public class OrdersController {
 			return responseMessage;
 		}
 		
+		//如果订单已付款完成，取消时需要进行退款
+		
+		
+		
 		//取出订单中的items的items_id和items_num,更新商品inventory和sales_volume信息
 		Iterator<OrderDetailCustom> iterator = (ordersCustoms.getOrderDetailCustom()).iterator();
 		
@@ -326,5 +330,64 @@ public class OrdersController {
 		return responseMessage;
 	}
 	
+	
+	/**
+	 * 根据订单id进行付款
+	 * @param orders_id
+	 * @return
+	 */
+	@RequestMapping(value="/payForOrdersByOrdersId")
+	public @ResponseBody ResponseMessage payForOrdersByOrdersId(String orders_id){
+		
+		ResponseMessage responseMessage = new ResponseMessage();
+		
+		//对传入的参数进行校验
+		if(TextUtils.isEmpty(orders_id)){
+			responseMessage.setCode(ConstantResponse.CODE_PARAMETER_EMPTY);
+			responseMessage.setContent(ConstantResponse.CONTENT_PARAMETER_EMPTY);
+			return responseMessage;
+		}
+		
+		//根据orders_id查询订单
+		
+		OrdersCustom ordersCustoms = ordersService.findOrdersByOrdersId(orders_id);
+
+		if(ordersCustoms==null){
+			responseMessage.setCode(ConstantResponse.CODE_ORDERS_NOEXISTS);
+			responseMessage.setContent(ConstantResponse.CONTENT_ORDERS_NOEXISTS);
+			return responseMessage;
+		}
+		
+		//根据当前订单的状态决定
+		if(ordersCustoms.getState().equals("1")||ordersCustoms.getState().equals("2")||ordersCustoms.getState().equals("3")){
+			responseMessage.setCode(ConstantResponse.CODE_ORDERS_PAYMENT_COMPLETED);
+			responseMessage.setContent(ConstantResponse.CONTENT_ORDERS_PAYMENT_COMPLETED);
+			return responseMessage;
+		}
+		else if(ordersCustoms.getState().equals("4")){
+			responseMessage.setCode(ConstantResponse.CODE_ORDERS_CANCELED);
+			responseMessage.setContent(ConstantResponse.CONTENT_ORDERS_CANCELED);
+			return responseMessage;
+		}
+		
+		//订单待支付
+		if(ordersCustoms.getState().equals("0")){
+			String sum = ordersCustoms.getSum();
+			if(TextUtils.isEmpty(sum)){
+				responseMessage.setCode(ConstantResponse.CODE_ORDERS_INFO_ERROR);
+				responseMessage.setContent(ConstantResponse.CONTENT_ORDERS_INFO_ERROR);
+				return responseMessage;
+			}
+			
+			
+//			if(Double.parseDouble(sum)>)){
+//				
+//			}
+			
+		}
+		
+		
+		return responseMessage;
+	}
 	
 }

@@ -60,4 +60,14 @@ public class ConstantResponse {
 	public static final String CONTENT_ORDERS_NOEXISTS = "订单不存在";
 	
 	
+	public static final String CODE_ORDERS_PAYMENT_COMPLETED = "0000014";
+	public static final String CONTENT_ORDERS_PAYMENT_COMPLETED = "订单已支付";
+	
+	
+	public static final String CODE_ORDERS_CANCELED = "0000015";
+	public static final String CONTENT_ORDERS_CANCELED = "订单已取消";
+	
+	
+	public static final String CODE_ORDERS_INFO_ERROR = "0000016";
+	public static final String CONTENT_ORDERS_INFO_ERROR = "订单信息错误";
 }

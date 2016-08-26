@@ -21,7 +21,8 @@ public class customObjectUtils {
 				        ||TextUtils.isEmpty(addressCustom.getPhone_number())
 				        ||TextUtils.isEmpty(addressCustom.getProvince())
 				        ||TextUtils.isEmpty(addressCustom.getCity())
-				        ||TextUtils.isEmpty(addressCustom.getDetail_address());
+				        ||TextUtils.isEmpty(addressCustom.getDetail_address())
+				        ||TextUtils.isEmpty(addressCustom.getDefault_address());
 		
 		return flag;
 		

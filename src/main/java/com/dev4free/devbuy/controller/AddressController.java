@@ -116,27 +116,31 @@ public class AddressController {
 		
 		String user_id = user.getUser_id();
 		
+		if(addressCustom.getDefault_address().equals("0")){
+
+			//先查询是否已经设置默认地址
+			AddressCustom addr1 = new AddressCustom();
+			addr1.setUser_id(user_id);
+			addr1.setDefault_address("0");
+			ArrayList<Address> temp = addressService.findAddressByAddress(addr1);
+			
+			if(temp.size()!=0){
+				//已经设置默认地址，则更改原来的默认地址的default_address属性为null
+				Address addr3 = temp.get(0) ;
+				if(!addr3.getAddress_id().equals(addressCustom.getAddress_id())){
+					addr3.setDefault_address(null);
+					addressService.updateShippingAddress(addr3);
+				}
+			}
+		}
 		
-		AddressCustom addr1 = new AddressCustom();
-		addr1.setUser_id(user_id);
-		addr1.setDefault_address("0");
-		
-		ArrayList<Address> temp = addressService.findAddressByAddress(addr1);
-		
+		//不需要设置该地址为默认地址
 		Address address = new Address();
 		BeanUtils.copyProperties(addressCustom, address);
 		address.setUser_id(user_id);
 		
-		if(temp.size()!=0){
-			address.setDefault_address(null);
-		}
-		else if(temp.size()==0){
-			address.setDefault_address("0");
-		}
-		
 		address.setAddress_id(UUIDUtils.getId()); //传入参数中不包括id项
 		addressService.insertShippingAddress(address);
-		
 		return responseMessage;
 		
 	}
