@@ -14,12 +14,12 @@ public class Items {
 	private String category;
 	private String items_lb;
 	private String price;
+	private String current_price;
 	private String image;
 	private String inventory;
 	private String sales_volume;
 	private String area;
 	private String express_fee;
-	
 	public String getItems_id() {
 		return items_id;
 	}
@@ -56,6 +56,12 @@ public class Items {
 	public void setPrice(String price) {
 		this.price = price;
 	}
+	public String getCurrent_price() {
+		return current_price;
+	}
+	public void setCurrent_price(String current_price) {
+		this.current_price = current_price;
+	}
 	public String getImage() {
 		return image;
 	}
@@ -89,9 +95,9 @@ public class Items {
 	@Override
 	public String toString() {
 		return "Items [items_id=" + items_id + ", itemsname=" + itemsname + ", description=" + description
-				+ ", category=" + category + ", items_lb=" + items_lb + ", price=" + price + ", image=" + image
-				+ ", inventory=" + inventory + ", sales_volume=" + sales_volume + ", area=" + area + ", express_fee="
-				+ express_fee + "]";
+				+ ", category=" + category + ", items_lb=" + items_lb + ", price=" + price + ", current_price="
+				+ current_price + ", image=" + image + ", inventory=" + inventory + ", sales_volume=" + sales_volume
+				+ ", area=" + area + ", express_fee=" + express_fee + "]";
 	}
 
 

@@ -136,9 +136,9 @@ public class OrdersController {
 			}
 			
 			double num = Double.parseDouble(items_num);
-			double price = Double.parseDouble(items.getPrice());
+			double current_price = Double.parseDouble(items.getCurrent_price());
 			
-			sum = sum + num*price; //将所有商品的单价*数量相加，得到订单总金额
+			sum = sum + num*current_price; //将所有商品的单价*数量相加，得到订单总金额
 			
 		}
 

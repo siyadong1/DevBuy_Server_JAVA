@@ -36,7 +36,7 @@ import com.dev4free.devbuy.utils.customObjectUtils;
 public class AddressController {
 
 	//LOGGER用于打印日志，一般在调试的时候打印DEBUG级别的日志
-	private static final Logger LOGGER = Logger.getLogger(CityController.class);
+	private static final Logger LOGGER = Logger.getLogger(AddressController.class);
 	
 	@Autowired
 	AddressService addressService;

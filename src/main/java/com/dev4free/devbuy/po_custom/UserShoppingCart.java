@@ -9,10 +9,10 @@ public class UserShoppingCart {
 
 	private String itemsname;
 	private String description;
-	private String items_price;
+	private String price;
+	private String current_price;
 	private String image;
 	private String items_num;
-	
 	public String getItemsname() {
 		return itemsname;
 	}
@@ -25,11 +25,17 @@ public class UserShoppingCart {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public String getItems_price() {
-		return items_price;
+	public String getPrice() {
+		return price;
 	}
-	public void setItems_price(String items_price) {
-		this.items_price = items_price;
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	public String getCurrent_price() {
+		return current_price;
+	}
+	public void setCurrent_price(String current_price) {
+		this.current_price = current_price;
 	}
 	public String getImage() {
 		return image;
@@ -43,11 +49,11 @@ public class UserShoppingCart {
 	public void setItems_num(String items_num) {
 		this.items_num = items_num;
 	}
-	
 	@Override
 	public String toString() {
-		return "UserShoppingCart [itemsname=" + itemsname + ", description=" + description + ", items_price="
-				+ items_price + ", image=" + image + ", items_num=" + items_num + "]";
+		return "UserShoppingCart [itemsname=" + itemsname + ", description=" + description + ", price=" + price
+				+ ", current_price=" + current_price + ", image=" + image + ", items_num=" + items_num + "]";
 	}
-	
+
+
 }

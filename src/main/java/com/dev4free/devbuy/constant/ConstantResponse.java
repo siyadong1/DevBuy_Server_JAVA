@@ -78,4 +78,10 @@ public class ConstantResponse {
 	public static final String CODE_ORDERS_STATE_ERROR = "0000018";
 	public static final String CONTENT_ORDERS_STATE_ERROR = "订单状态错误";
 	
+	
+	public static final String CODE_ITEMS_PICTURE_ERROR = "0000019";
+	public static final String CONTENT_ITEMS_PICTURE_ERROR = "商品图片命名错误";
+	
+	
+	
 }
