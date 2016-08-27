@@ -3,7 +3,6 @@ package com.dev4free.devbuy.mapper;
 import java.util.ArrayList;
 
 import com.dev4free.devbuy.po.Address;
-import com.dev4free.devbuy.po_custom.AddressCustom;
 
 
 public interface AddressMapper {
@@ -12,7 +11,7 @@ public interface AddressMapper {
 	 * 根据用户名称查询收货地址
 	 * @return 
 	 */
-	public ArrayList<Address> findAddressByAddress(AddressCustom addressCustom);
+	public ArrayList<Address> findAddressByAddress(Address address);
 	
 	/**
 	 * 添加收货地址

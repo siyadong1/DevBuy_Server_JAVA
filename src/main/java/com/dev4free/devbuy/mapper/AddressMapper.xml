@@ -54,7 +54,7 @@
 
 
 
-<select id="findAddressByAddress" parameterType="AddressCustom" resultType="Address">
+<select id="findAddressByAddress" parameterType="Address" resultType="Address">
 SELECT * FROM address 
 <where>
 	<include refid="query_address_by_address_id"></include>
