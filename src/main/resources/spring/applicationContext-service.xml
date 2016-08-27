@@ -32,4 +32,10 @@
 <bean id="OrdersService" class="com.dev4free.devbuy.serviceImp.OrdersServiceImpl">
 </bean>
 
+<bean id="WalletService" class="com.dev4free.devbuy.serviceImp.WalletServiceImpl">
+</bean>
+
+<bean id="HomePagesService" class="com.dev4free.devbuy.serviceImp.HomePagesServiceImpl">
+</bean>
+
 </beans>
