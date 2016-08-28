@@ -13,6 +13,7 @@ public class UserShoppingCart {
 	private String price;
 	private String current_price;
 	private String image;
+	private String inventory;
 	private String items_num;
 	public String getCart_id() {
 		return cart_id;
@@ -50,6 +51,12 @@ public class UserShoppingCart {
 	public void setImage(String image) {
 		this.image = image;
 	}
+	public String getInventory() {
+		return inventory;
+	}
+	public void setInventory(String inventory) {
+		this.inventory = inventory;
+	}
 	public String getItems_num() {
 		return items_num;
 	}
@@ -59,9 +66,10 @@ public class UserShoppingCart {
 	@Override
 	public String toString() {
 		return "UserShoppingCart [cart_id=" + cart_id + ", itemsname=" + itemsname + ", description=" + description
-				+ ", price=" + price + ", current_price=" + current_price + ", image=" + image + ", items_num="
-				+ items_num + "]";
+				+ ", price=" + price + ", current_price=" + current_price + ", image=" + image + ", inventory="
+				+ inventory + ", items_num=" + items_num + "]";
 	}
+	
 
 
 
