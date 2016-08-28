@@ -1,6 +1,6 @@
 package com.dev4free.devbuy.utils;
 
-import com.dev4free.devbuy.po_custom.AddressCustom;
+import com.dev4free.devbuy.po.Address;
 import com.dev4free.devbuy.po_custom.OrdersCustom;
 
 /**
@@ -15,15 +15,14 @@ public class customObjectUtils {
 	 * @param addressCustom
 	 * @return
 	 */
-	public static boolean isAddressEmpty(AddressCustom addressCustom){
+	public static boolean isAddressEmpty(Address address){
 		
-		boolean flag = TextUtils.isEmpty(addressCustom.getUsername())
-						||TextUtils.isEmpty(addressCustom.getConsignee_name())
-				        ||TextUtils.isEmpty(addressCustom.getPhone_number())
-				        ||TextUtils.isEmpty(addressCustom.getProvince())
-				        ||TextUtils.isEmpty(addressCustom.getCity())
-				        ||TextUtils.isEmpty(addressCustom.getDetail_address())
-				        ||TextUtils.isEmpty(addressCustom.getDefault_address());
+		boolean flag = TextUtils.isEmpty(address.getConsignee_name())
+				        ||TextUtils.isEmpty(address.getPhone_number())
+				        ||TextUtils.isEmpty(address.getProvince())
+				        ||TextUtils.isEmpty(address.getCity())
+				        ||TextUtils.isEmpty(address.getDetail_address())
+				        ||TextUtils.isEmpty(address.getDefault_address());
 		
 		return flag;	
 	}

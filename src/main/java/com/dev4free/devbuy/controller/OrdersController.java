@@ -18,7 +18,6 @@ import com.dev4free.devbuy.po.OrderDetail;
 import com.dev4free.devbuy.po.Orders;
 import com.dev4free.devbuy.po.User;
 import com.dev4free.devbuy.po.Wallet;
-import com.dev4free.devbuy.po_custom.AddressCustom;
 import com.dev4free.devbuy.po_custom.ItemsCustom;
 import com.dev4free.devbuy.po_custom.ItemsIdAndNum;
 import com.dev4free.devbuy.po_custom.OrderDetailCustom;
@@ -92,7 +91,7 @@ public class OrdersController {
 		String user_id = user.getUser_id();
 		
 		//判断传入address_id对应的收货地址是否存在,若存在，判断是否是username对应用户的收货地址
-		AddressCustom addr1 = new AddressCustom();
+		Address addr1 = new Address();
 		addr1.setAddress_id(address_id);
 
 		ArrayList<Address> temp = addressService.findAddressByAddress(addr1);

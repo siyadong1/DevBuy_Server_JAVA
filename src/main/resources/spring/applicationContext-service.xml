@@ -35,7 +35,10 @@
 <bean id="WalletService" class="com.dev4free.devbuy.serviceImp.WalletServiceImpl">
 </bean>
 
-<bean id="HomePagesService" class="com.dev4free.devbuy.serviceImp.HomePagesServiceImpl">
+<bean id="FeedbackService" class="com.dev4free.devbuy.serviceImp.FeedbackServiceImpl">
+</bean>
+
+<bean id="ConstantInfoService" class="com.dev4free.devbuy.serviceImp.ConstantInfoServiceImpl">
 </bean>
 
 </beans>

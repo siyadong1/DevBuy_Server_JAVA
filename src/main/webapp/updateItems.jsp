@@ -7,11 +7,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-    		<h2>对于items表单的数据录入</h2>	
+    		<h2>对于items表单的数据更新</h2>	
     		
 		<form id="itemForm"
-		action="http://www.dev4free.com/devbuy/java/insertItems.action"
+		action="http://localhost:8080/devbuy/java/updateItemsByItemsId.action"
 		method="post" enctype="multipart/form-data">
+			<tr>
+				<td>商品的id</td>
+				<td >
+					<input type="text" name="items_id"/>
+				</td>
+			</tr>
+			<br /><br />
 			<tr>
 				<td>显示名称</td>
 				<td >
@@ -53,7 +60,7 @@
 					<input type="text" name="current_price" />
 				</td>
 			</tr>			
-			<br /><br />
+			<br /><br />			
 			<tr>
 				<td>商品图片</td>
 				<td>
@@ -90,9 +97,9 @@
 			</tr>			
 			<br /><br />			
 			<tr>
-				<td>提交</td>
+				<td>更新</td>
 				<td >
-					<input type="submit" value="确定"/>
+					<input type="submit" value="更新"/>
 				</td>
 			</tr>
 		</form>

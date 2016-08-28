@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.dev4free.devbuy.mapper.AddressMapper;
 import com.dev4free.devbuy.po.Address;
-import com.dev4free.devbuy.po_custom.AddressCustom;
 import com.dev4free.devbuy.service.AddressService;
 
 
@@ -18,11 +17,11 @@ public class AddressServiceImpl implements AddressService {
 	/**
 	 * 查询收货地址
 	 */
-	public ArrayList<Address> findAddressByAddress(AddressCustom addressCustom) {
+	public ArrayList<Address> findAddressByAddress(Address address) {
 		
-		ArrayList<Address> address = addressMapper.findAddressByAddress(addressCustom);
+		ArrayList<Address> addr = addressMapper.findAddressByAddress(address);
 		
-		return address;
+		return addr;
 	}
 
 	/**

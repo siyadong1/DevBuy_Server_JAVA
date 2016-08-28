@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.dev4free.devbuy.mapper.FeedbackMapper">
+
+<!-- 查询FeedbackInfo -->
+<select id="findFeedbackByUserId" parameterType="String" resultType="Feedback">
+SELECT * FROM feedback 
+WHERE user_id=#{user_id}
+</select>
+
+<!-- 更新FeedbackInfo -->
+<update id="updateFeedbackByUserId" parameterType="Feedback">
+UPDATE feedback 
+SET content=#{content} 
+WHERE user_id=#{user_id}
+</update>
+
+<!-- 创建FeedbackInfo -->
+<insert id="insertFeedbackInfo" parameterType="Feedback">
+INSERT INTO feedback (feedback_id,user_id,content) 
+VALUES (#{feedback_id},#{user_id},#{content})
+</insert>
+
+
+
+</mapper>
