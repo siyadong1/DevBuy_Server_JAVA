@@ -85,16 +85,11 @@ public class HomePagesController {
 	 * @return
 	 */
 	@RequestMapping(value="/findHomePagesAboutus")
-	public @ResponseBody ResponseMessage findHomePagesAboutus(String info_name){
+	public @ResponseBody ResponseMessage findHomePagesAboutus(){
 		
 		ResponseMessage responseMessage = new ResponseMessage();
 		
-		//对传入的参数进行校验
-		if(TextUtils.isEmpty(info_name)){
-			responseMessage.setCode(ConstantResponse.CODE_PARAMETER_EMPTY);
-			responseMessage.setContent(ConstantResponse.CONTENT_PARAMETER_EMPTY);
-			return responseMessage;
-		}
+		String info_name = "关于我们";
 		
 		ConstantInfo constantInfo = constantInfoService.findConstantInfo(info_name);
 		
