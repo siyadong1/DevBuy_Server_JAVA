@@ -192,6 +192,8 @@ public class OrdersController {
 
 		ordersService.insertOrdersRecord(orders);
 		
+		responseMessage.setContent(JSON.toJSON(orders_id));
+		
 		return responseMessage;
 	}
 
