@@ -12,14 +12,14 @@ WHERE user_id=#{user_id}
 <!-- 更新FeedbackInfo -->
 <update id="updateFeedbackByUserId" parameterType="Feedback">
 UPDATE feedback 
-SET content=#{content} 
+SET content=#{content},createtime=#{createtime} 
 WHERE user_id=#{user_id}
 </update>
 
 <!-- 创建FeedbackInfo -->
 <insert id="insertFeedbackInfo" parameterType="Feedback">
-INSERT INTO feedback (feedback_id,user_id,content) 
-VALUES (#{feedback_id},#{user_id},#{content})
+INSERT INTO feedback (feedback_id,user_id,content,createtime) 
+VALUES (#{feedback_id},#{user_id},#{content},#{createtime})
 </insert>
 
 

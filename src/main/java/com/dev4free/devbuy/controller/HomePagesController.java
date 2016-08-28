@@ -16,6 +16,7 @@ import com.dev4free.devbuy.service.ConstantInfoService;
 import com.dev4free.devbuy.service.FeedbackService;
 import com.dev4free.devbuy.service.UserService;
 import com.dev4free.devbuy.utils.TextUtils;
+import com.dev4free.devbuy.utils.TimeUtils;
 import com.dev4free.devbuy.utils.UUIDUtils;
 
 @Controller
@@ -66,10 +67,12 @@ public class HomePagesController {
 			feedback.setFeedback_id(UUIDUtils.getId());
 			feedback.setUser_id(user_id);
 			feedback.setContent(content);
+			feedback.setCreatetime(TimeUtils.getNow());
 			feedbackService.insertFeedbackInfo(feedback);
 			return responseMessage;
 		}
-
+		
+		feedback.setCreatetime(TimeUtils.getNow());
 		feedback.setContent(content);
 		feedbackService.updateFeedbackByUserId(feedback);
 		

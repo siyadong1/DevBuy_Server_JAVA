@@ -6,6 +6,7 @@ public class Feedback {
 	private String feedback_id;
 	private String user_id;
 	private String content;
+	private String createtime;
 	public String getFeedback_id() {
 		return feedback_id;
 	}
@@ -24,10 +25,18 @@ public class Feedback {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public String getCreatetime() {
+		return createtime;
+	}
+	public void setCreatetime(String createtime) {
+		this.createtime = createtime;
+	}
 	@Override
 	public String toString() {
-		return "Feedback [feedback_id=" + feedback_id + ", user_id=" + user_id + ", content=" + content + "]";
+		return "Feedback [feedback_id=" + feedback_id + ", user_id=" + user_id + ", content=" + content
+				+ ", createtime=" + createtime + "]";
 	}
 	
+
 	
 }
