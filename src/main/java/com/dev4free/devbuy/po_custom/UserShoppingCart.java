@@ -8,6 +8,7 @@ package com.dev4free.devbuy.po_custom;
 public class UserShoppingCart {
 
 	private String cart_id;
+	private String items_id;
 	private String itemsname;
 	private String description;
 	private String price;
@@ -20,6 +21,12 @@ public class UserShoppingCart {
 	}
 	public void setCart_id(String cart_id) {
 		this.cart_id = cart_id;
+	}
+	public String getItems_id() {
+		return items_id;
+	}
+	public void setItems_id(String items_id) {
+		this.items_id = items_id;
 	}
 	public String getItemsname() {
 		return itemsname;
@@ -65,12 +72,10 @@ public class UserShoppingCart {
 	}
 	@Override
 	public String toString() {
-		return "UserShoppingCart [cart_id=" + cart_id + ", itemsname=" + itemsname + ", description=" + description
-				+ ", price=" + price + ", current_price=" + current_price + ", image=" + image + ", inventory="
-				+ inventory + ", items_num=" + items_num + "]";
+		return "UserShoppingCart [cart_id=" + cart_id + ", items_id=" + items_id + ", itemsname=" + itemsname
+				+ ", description=" + description + ", price=" + price + ", current_price=" + current_price + ", image="
+				+ image + ", inventory=" + inventory + ", items_num=" + items_num + "]";
 	}
-	
-
 
 
 }

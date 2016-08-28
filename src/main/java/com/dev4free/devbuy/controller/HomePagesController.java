@@ -62,21 +62,14 @@ public class HomePagesController {
 
 		Feedback feedback = feedbackService.findFeedbackByUserId(user_id);
 		
-		if(feedback==null){
-			feedback = new Feedback();
-			feedback.setFeedback_id(UUIDUtils.getId());
-			feedback.setUser_id(user_id);
-			feedback.setContent(content);
-			feedback.setCreatetime(TimeUtils.getNow());
-			feedbackService.insertFeedbackInfo(feedback);
-			return responseMessage;
-		}
-		
-		feedback.setCreatetime(TimeUtils.getNow());
+		feedback = new Feedback();
+		feedback.setFeedback_id(UUIDUtils.getId());
+		feedback.setUser_id(user_id);
 		feedback.setContent(content);
-		feedbackService.updateFeedbackByUserId(feedback);
-		
+		feedback.setCreatetime(TimeUtils.getNow());
+		feedbackService.insertFeedbackInfo(feedback);
 		return responseMessage;
+
 	}
 	
 	/**
