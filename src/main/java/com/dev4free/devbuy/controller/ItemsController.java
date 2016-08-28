@@ -62,7 +62,7 @@ public class ItemsController {
 		String originalFileName = itemspic.getOriginalFilename();
 		
 		//上传图片
-		if(itemspic!=null&&originalFileName!=null&&originalFileName.length()>0){
+		if(itemspic.getSize()!=0&&originalFileName!=null&&originalFileName.length()>0){
 			 
 			//存入数据库的图片名称
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -156,7 +156,7 @@ public class ItemsController {
 			return responseMessage;
 		}
 		
-		if(itemspic != null){
+		if(itemspic.getSize() != 0){
 			//说明需要更新商品图片，上传新的图片
 			String originalFileName = itemspic.getOriginalFilename();
 			if(originalFileName!=null&&originalFileName.length()>0){

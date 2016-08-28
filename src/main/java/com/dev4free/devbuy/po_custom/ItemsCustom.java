@@ -2,6 +2,8 @@ package com.dev4free.devbuy.po_custom;
 
 import java.util.ArrayList;
 
+import com.alibaba.fastjson.JSONArray;
+
 /**
  * 提交订单时传入的商品信息
  * @author lzw
@@ -23,6 +25,5 @@ public class ItemsCustom {
 	public String toString() {
 		return "ItemsCustom [itemsIdAndNum=" + itemsIdAndNum + "]";
 	}
-	
 	
 }

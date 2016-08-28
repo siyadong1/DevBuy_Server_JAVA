@@ -7,12 +7,19 @@ package com.dev4free.devbuy.po_custom;
  */
 public class UserShoppingCart {
 
+	private String cart_id;
 	private String itemsname;
 	private String description;
 	private String price;
 	private String current_price;
 	private String image;
 	private String items_num;
+	public String getCart_id() {
+		return cart_id;
+	}
+	public void setCart_id(String cart_id) {
+		this.cart_id = cart_id;
+	}
 	public String getItemsname() {
 		return itemsname;
 	}
@@ -51,9 +58,11 @@ public class UserShoppingCart {
 	}
 	@Override
 	public String toString() {
-		return "UserShoppingCart [itemsname=" + itemsname + ", description=" + description + ", price=" + price
-				+ ", current_price=" + current_price + ", image=" + image + ", items_num=" + items_num + "]";
+		return "UserShoppingCart [cart_id=" + cart_id + ", itemsname=" + itemsname + ", description=" + description
+				+ ", price=" + price + ", current_price=" + current_price + ", image=" + image + ", items_num="
+				+ items_num + "]";
 	}
+
 
 
 }

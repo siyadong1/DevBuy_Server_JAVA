@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.dev4free.devbuy.constant.ConstantResponse;
 import com.dev4free.devbuy.entity.ResponseMessage;
-import com.dev4free.devbuy.po.HomePages;
-import com.dev4free.devbuy.service.HomePagesService;
+import com.dev4free.devbuy.po.ConstantInfo;
+import com.dev4free.devbuy.po.Feedback;
+import com.dev4free.devbuy.po.User;
+import com.dev4free.devbuy.service.ConstantInfoService;
+import com.dev4free.devbuy.service.FeedbackService;
+import com.dev4free.devbuy.service.UserService;
 import com.dev4free.devbuy.utils.TextUtils;
 import com.dev4free.devbuy.utils.UUIDUtils;
 
@@ -19,51 +23,66 @@ import com.dev4free.devbuy.utils.UUIDUtils;
 public class HomePagesController {
 	
 	@Autowired
-	HomePagesService homePagesService;
+	FeedbackService feedbackService;
 	
+	@Autowired
+	UserService userService;
+	
+	@Autowired
+	ConstantInfoService constantInfoService;
 	
 	/**
-	 * 更新HomePagesInfo
-	 * @param info_name
-	 * @param info
+	 * 更新Feedback
+	 * @param username
+	 * @param content
 	 * @return
 	 */
-	@RequestMapping(value="/updateHomePagesInfo")
-	public @ResponseBody ResponseMessage updateHomePagesInfo(String info_name,String info){
+	@RequestMapping(value="/updateHomePagesFeedback")
+	public @ResponseBody ResponseMessage updateHomePagesInfo(String username,String content){
 		
 		ResponseMessage responseMessage = new ResponseMessage();
 		
 		//对传入的参数进行校验
-		if(TextUtils.isEmpty(info_name)||TextUtils.isEmpty(info)){
+		if(TextUtils.isEmpty(username)||TextUtils.isEmpty(content)){
 			responseMessage.setCode(ConstantResponse.CODE_PARAMETER_EMPTY);
 			responseMessage.setContent(ConstantResponse.CONTENT_PARAMETER_EMPTY);
 			return responseMessage;
 		}
 		
-		HomePages homePages = homePagesService.findHomePagesInfoByInfoName(info_name);
-		
-		if(homePages==null){
-			homePages = new HomePages();
-			homePages.setInfo_id(UUIDUtils.getId());
-			homePages.setInfo_name(info_name);
-			homePages.setInfo(info);
-			homePagesService.insertHomePagesInfo(homePages);
+		//根据username查找对应的user_id
+		User user = userService.findUserByUsername(username);
+
+		if(user==null){
+			responseMessage.setCode(ConstantResponse.CODE_USER_NOEXISTS);
+			responseMessage.setContent(ConstantResponse.CONTENT_USER_NOEXISTS);
 			return responseMessage;
 		}
+		String user_id = user.getUser_id();
+
+		Feedback feedback = feedbackService.findFeedbackByUserId(user_id);
 		
-		homePages.setInfo(info);
-		homePagesService.insertHomePagesInfo(homePages);
+		if(feedback==null){
+			feedback = new Feedback();
+			feedback.setFeedback_id(UUIDUtils.getId());
+			feedback.setUser_id(user_id);
+			feedback.setContent(content);
+			feedbackService.insertFeedbackInfo(feedback);
+			return responseMessage;
+		}
+
+		feedback.setContent(content);
+		feedbackService.updateFeedbackByUserId(feedback);
 		
 		return responseMessage;
 	}
 	
 	/**
-	 * 查询HomePagesInfo
+	 * 查询ConstantInfo
 	 * @param info_name
 	 * @return
 	 */
-	@RequestMapping(value="/findHomePagesInfo")
-	public @ResponseBody ResponseMessage findHomePagesInfo(String info_name){
+	@RequestMapping(value="/findHomePagesAboutus")
+	public @ResponseBody ResponseMessage findHomePagesAboutus(String info_name){
 		
 		ResponseMessage responseMessage = new ResponseMessage();
 		
@@ -74,9 +93,9 @@ public class HomePagesController {
 			return responseMessage;
 		}
 		
-		HomePages homePages = homePagesService.findHomePagesInfoByInfoName(info_name);
+		ConstantInfo constantInfo = constantInfoService.findConstantInfo(info_name);
 		
-		responseMessage.setContent(JSON.toJSON(homePages));
+		responseMessage.setContent(JSON.toJSON(constantInfo));
 		
 		return responseMessage;
 	}

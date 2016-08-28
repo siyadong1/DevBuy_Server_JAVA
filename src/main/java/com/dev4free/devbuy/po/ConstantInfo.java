@@ -1,10 +1,11 @@
 package com.dev4free.devbuy.po;
 
-public class HomePages {
+public class ConstantInfo {
 
+	//AboutUs类对应数据库中的aboutus表
 	private String info_id;
 	private String info_name;
-	private String info;
+	private String info_content;
 	
 	public String getInfo_id() {
 		return info_id;
@@ -18,16 +19,15 @@ public class HomePages {
 	public void setInfo_name(String info_name) {
 		this.info_name = info_name;
 	}
-	public String getInfo() {
-		return info;
+	public String getInfo_content() {
+		return info_content;
 	}
-	public void setInfo(String info) {
-		this.info = info;
+	public void setInfo_content(String info_content) {
+		this.info_content = info_content;
 	}
-	
 	@Override
 	public String toString() {
-		return "HomePages [info_id=" + info_id + ", info_name=" + info_name + ", info=" + info + "]";
+		return "AboutUs [info_id=" + info_id + ", info_name=" + info_name + ", info_content=" + info_content + "]";
 	}
 	
 	
