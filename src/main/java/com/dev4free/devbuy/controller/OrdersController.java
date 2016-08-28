@@ -2,6 +2,7 @@ package com.dev4free.devbuy.controller;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.dev4free.devbuy.constant.ConstantResponse;
 import com.dev4free.devbuy.entity.ResponseMessage;
 import com.dev4free.devbuy.po.Address;
@@ -68,17 +71,20 @@ public class OrdersController {
 	 * @return
 	 */
 	@RequestMapping(value="/submitOrders")
-	public @ResponseBody ResponseMessage submitOrders(String username, String address_id, ItemsCustom itemsCustom){
+	public @ResponseBody ResponseMessage submitOrders(String username, String address_id, String itemsIdAndNum){
 		
 		ResponseMessage responseMessage = new ResponseMessage();
 		
 		//对传入的参数进行校验
-		if(TextUtils.isEmpty(username)||TextUtils.isEmpty(address_id)|| itemsCustom==null){
+		if(TextUtils.isEmpty(username)||TextUtils.isEmpty(address_id)|| TextUtils.isEmpty(itemsIdAndNum)){
 			responseMessage.setCode(ConstantResponse.CODE_PARAMETER_EMPTY);
 			responseMessage.setContent(ConstantResponse.CONTENT_PARAMETER_EMPTY);
 			return responseMessage;
 		}
-		
+
+		//从传入的json字符串中获取ItemsAndNum属性项
+		List<ItemsIdAndNum> temp_itemsAndNum = new ArrayList<ItemsIdAndNum>();
+		temp_itemsAndNum = JSONObject.parseArray(itemsIdAndNum, ItemsIdAndNum.class);
 		
 		//根据username查找对应的user_id
 		User user = userService.findUserByUsername(username);
@@ -102,13 +108,11 @@ public class OrdersController {
 			return responseMessage;
 		}
 		
-		
 		String orders_id = UUIDUtils.getId(); //先生成订单号orders_id,orderdetail表中的外键
 		double sum = 0; //订单总金额
-		String state = "待支付";
+		String state = "0";
 		
-		ArrayList<ItemsIdAndNum> itemsIdAndNum = itemsCustom.getItemsIdAndNum();
-		Iterator<ItemsIdAndNum> iterator = itemsIdAndNum.iterator();
+		Iterator<ItemsIdAndNum> iterator = temp_itemsAndNum.iterator();
 		
 		while(iterator.hasNext()){
 			
@@ -142,7 +146,7 @@ public class OrdersController {
 		}
 
 		//当保证所有商品库存量都足够可以下订单时，再创建订单详情表记录，更新items表中商品的库存量和销量
-		iterator = itemsIdAndNum.iterator();
+		iterator = temp_itemsAndNum.iterator();
 		while(iterator.hasNext()){
 
 			ItemsIdAndNum idAndNum = iterator.next();
