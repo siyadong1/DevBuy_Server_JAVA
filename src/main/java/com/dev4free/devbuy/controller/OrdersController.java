@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.dev4free.devbuy.constant.Constant;
 import com.dev4free.devbuy.constant.ConstantResponse;
 import com.dev4free.devbuy.entity.ResponseMessage;
 import com.dev4free.devbuy.po.Address;
@@ -110,7 +111,7 @@ public class OrdersController {
 		
 		String orders_id = UUIDUtils.getId(); //先生成订单号orders_id,orderdetail表中的外键
 		double sum = 0; //订单总金额
-		String state = "0";
+		String state = Constant.ORDERS_STATE_WAIT_FOR_PAYMENT;
 		
 		Iterator<ItemsIdAndNum> iterator = temp_itemsAndNum.iterator();
 		
@@ -131,7 +132,7 @@ public class OrdersController {
 			else {
 				String inventory = items.getInventory();
 				
-				if(inventory.equals("0")||inventory==null||Integer.parseInt(inventory)<Integer.parseInt(items_num)){
+				if(inventory.equals(Constant.ORDERS_STATE_WAIT_FOR_PAYMENT)||inventory==null||Integer.parseInt(inventory)<Integer.parseInt(items_num)){
 					responseMessage.setCode(ConstantResponse.CODE_ITMES_INVENTORY_ERROR);
 					responseMessage.setContent(ConstantResponse.CONTENT_ITMES_INVENTORY_ERROR);
 					return responseMessage;
@@ -354,7 +355,7 @@ public class OrdersController {
 			walletService.updateWalletBalance(wallet);
 		}
 		
-		String state = "4"; //订单状态更改为已取消
+		String state = Constant.ORDERS_STATE_CANCELED; //订单状态更改为已取消
 
 		//更改订单状态
 		Orders orders = new Orders();
@@ -404,19 +405,21 @@ public class OrdersController {
 		}
 		
 		//根据当前订单的状态进行处理
-		if(ordersCustoms.getState().equals("1")||ordersCustoms.getState().equals("2")||ordersCustoms.getState().equals("3")){
+		if(ordersCustoms.getState().equals(Constant.ORDERS_STATE_WAIT_FOR_SHIPMENT)
+				||ordersCustoms.getState().equals(Constant.ORDERS_STATE_WAIT_FOR_SHIPMENT)
+				||ordersCustoms.getState().equals(Constant.ORDERS_STATE_COMPLETED)){
 			responseMessage.setCode(ConstantResponse.CODE_ORDERS_PAYMENT_COMPLETED);
 			responseMessage.setContent(ConstantResponse.CONTENT_ORDERS_PAYMENT_COMPLETED);
 			return responseMessage;
 		}
-		else if(ordersCustoms.getState().equals("4")){
+		else if(ordersCustoms.getState().equals(Constant.ORDERS_STATE_CANCELED)){
 			responseMessage.setCode(ConstantResponse.CODE_ORDERS_CANCELED);
 			responseMessage.setContent(ConstantResponse.CONTENT_ORDERS_CANCELED);
 			return responseMessage;
 		}
 		
 		//订单待支付
-		if(ordersCustoms.getState().equals("0")){
+		if(ordersCustoms.getState().equals(Constant.ORDERS_STATE_WAIT_FOR_PAYMENT)){
 			String sum = ordersCustoms.getSum();
 			if(TextUtils.isEmpty(sum)){
 				responseMessage.setCode(ConstantResponse.CODE_ORDERS_INFO_ERROR);
@@ -440,7 +443,7 @@ public class OrdersController {
 			walletService.updateWalletBalance(wallet);
 			
 			//支付完成，更新订单状态
-			String state = "1"; //待发货
+			String state = Constant.ORDERS_STATE_WAIT_FOR_SHIPMENT; //待发货
 			Orders orders = new Orders();
 			orders.setOrders_id(orders_id);
 			orders.setState(state);

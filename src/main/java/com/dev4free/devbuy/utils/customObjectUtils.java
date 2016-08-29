@@ -1,5 +1,6 @@
 package com.dev4free.devbuy.utils;
 
+import com.dev4free.devbuy.constant.Constant;
 import com.dev4free.devbuy.po.Address;
 import com.dev4free.devbuy.po_custom.OrdersCustom;
 
@@ -52,7 +53,10 @@ public class customObjectUtils {
 		String s = "";
 		if(!TextUtils.isEmpty(ordersCustoms.getState())){
 			s = ordersCustoms.getState();
-			if(s.equals("0")||s.equals("1")||s.equals("2")||s.equals("3")){
+			if(s.equals(Constant.ORDERS_STATE_WAIT_FOR_PAYMENT)
+					||s.equals(Constant.ORDERS_STATE_WAIT_FOR_SHIPMENT)
+					||s.equals(Constant.ORDERS_STATE_WAIT_FOR_RECEIVING)
+					||s.equals(Constant.ORDERS_STATE_COMPLETED)){
 				flag = true; //处于0-3状态的订单都可以进行取消
 			}
 		}
@@ -68,7 +72,9 @@ public class customObjectUtils {
 	public static boolean isOrdersPaid(String state){
 		
 		boolean flag = false;
-		if(state.equals("1")||state.equals("2")||state.equals("3")){
+		if(state.equals(Constant.ORDERS_STATE_WAIT_FOR_SHIPMENT)
+				||state.equals(Constant.ORDERS_STATE_WAIT_FOR_RECEIVING)
+				||state.equals(Constant.ORDERS_STATE_COMPLETED)){
 			flag = true;
 		}
 		return flag;

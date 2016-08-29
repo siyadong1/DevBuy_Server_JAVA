@@ -37,5 +37,13 @@ public class Constant {
 	 */
 	public static final String IMAGE_ITEMS = "itemsPicture/";
 	
+	/**
+	 * 定义订单状态
+	 */
+	public static final String ORDERS_STATE_WAIT_FOR_PAYMENT = "0";   //待支付
+	public static final String ORDERS_STATE_WAIT_FOR_SHIPMENT = "1";  //待发货
+	public static final String ORDERS_STATE_WAIT_FOR_RECEIVING = "2"; //待收货
+	public static final String ORDERS_STATE_COMPLETED = "3";          //已完成
+	public static final String ORDERS_STATE_CANCELED = "4";           //已取消
 
 }
