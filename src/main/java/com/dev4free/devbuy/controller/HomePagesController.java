@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.dev4free.devbuy.constant.Constant;
 import com.dev4free.devbuy.constant.ConstantResponse;
 import com.dev4free.devbuy.entity.ResponseMessage;
 import com.dev4free.devbuy.po.ConstantInfo;
@@ -82,7 +83,7 @@ public class HomePagesController {
 		
 		ResponseMessage responseMessage = new ResponseMessage();
 		
-		String info_name = "关于我们";
+		String info_name = Constant.CONSTANT_INFO_NAME_ABOUTUS;
 		
 		ConstantInfo constantInfo = constantInfoService.findConstantInfo(info_name);
 		

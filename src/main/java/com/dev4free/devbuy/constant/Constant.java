@@ -46,4 +46,8 @@ public class Constant {
 	public static final String ORDERS_STATE_COMPLETED = "3";          //已完成
 	public static final String ORDERS_STATE_CANCELED = "4";           //已取消
 
+	/**
+	 * 定义ConstantInfo常量名称
+	 */
+	public static final String CONSTANT_INFO_NAME_ABOUTUS = "关于我们";
 }
