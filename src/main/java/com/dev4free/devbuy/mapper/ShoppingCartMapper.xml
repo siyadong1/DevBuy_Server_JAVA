@@ -64,7 +64,7 @@ WHERE cart_id=#{cart_id}
 
 
 <select id="findShoppingCartDetailsByUserId" parameterType="String" resultType="UserShoppingCart">
-SELECT items.itemsname,items.description,items.price,items.current_price,items.image,items.inventory,shoppingcart_record.cart_id,shoppingcart_record.items_num 
+SELECT items.items_id,items.itemsname,items.description,items.price,items.current_price,items.image,items.inventory,shoppingcart_record.cart_id,shoppingcart_record.items_num 
 FROM shoppingcart_record,items 
 WHERE shoppingcart_record.user_id=#{user_id} AND items.items_id=shoppingcart_record.items_id
 </select>
