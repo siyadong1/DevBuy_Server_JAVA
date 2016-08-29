@@ -90,4 +90,52 @@ public class WalletController {
 	
 	
 	
+	
+
+	/**
+	 * 用户钱包查询
+	 * @param username
+	 * @return
+	 */
+	@RequestMapping(value="/userWalletQuery")
+	public @ResponseBody ResponseMessage userWalletQuery(String username){
+		ResponseMessage responseMessage = new ResponseMessage();
+		
+		//对传入的参数进行校验
+		if(TextUtils.isEmpty(username)){
+			responseMessage.setCode(ConstantResponse.CODE_PARAMETER_EMPTY);
+			responseMessage.setContent(ConstantResponse.CONTENT_PARAMETER_EMPTY);
+			return responseMessage;
+		}
+
+		//根据username查找对应的user_id
+		User user = userService.findUserByUsername(username);
+
+		if(user==null){
+			responseMessage.setCode(ConstantResponse.CODE_USER_NOEXISTS);
+			responseMessage.setContent(ConstantResponse.CONTENT_USER_NOEXISTS);
+			return responseMessage;
+		}
+		String user_id = user.getUser_id();
+
+		Wallet wallet = walletService.findWalletBalance(user_id);
+		
+		if(wallet==null){
+			//提示用户去充值，创建钱包
+			responseMessage.setCode(ConstantResponse.CODE_WALLET_ERROR_NOWALLET);
+			responseMessage.setContent(ConstantResponse.CONTENT_WALLET_ERROR_NOWALLET);
+			return responseMessage;
+		}
+		
+		
+		responseMessage.setContent(wallet.getBalance());
+	
+		return responseMessage;
+	}
+	
+	
+	
+	
+	
+	
 }

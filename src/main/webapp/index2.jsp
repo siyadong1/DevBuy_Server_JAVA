@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8" />
-		<title></title>
+		<meta charset="UTF-8" />
+		<title>测试图片上传</title>
 	</head>
 	<body>
 		
@@ -11,7 +11,7 @@
 		action="http://www.dev4free.com/devbuy/java/modifyavatar.action"
 		method="post" enctype="multipart/form-data">
 		
-					<tr>
+			<tr>
 				<td>商品图片</td>
 				<td>
 				 <input type="file" name="avatarpic" /></td>

@@ -83,5 +83,8 @@ public class ConstantResponse {
 	public static final String CONTENT_ITEMS_PICTURE_ERROR = "商品图片命名错误";
 	
 	
+	public static final String CODE_WALLET_ERROR_NOWALLET = "0000020";
+	public static final String CONTENT_WALLET_ERROR_NOWALLET = "钱包为空，请先充值";
+	
 	
 }
