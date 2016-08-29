@@ -5,8 +5,8 @@
 
 
 <insert id="insertItems" parameterType="Items">
-INSERT INTO items(items_id,itemsname,description,category,items_lb,price,image,inventory,sales_volume,area,express_fee) 
-VALUES (#{items_id},#{itemsname},#{description},#{category},#{items_lb},#{price},#{image},#{inventory},#{sales_volume},#{area},#{express_fee});
+INSERT INTO items(items_id,itemsname,description,category,items_lb,price,current_price,image,inventory,sales_volume,area,express_fee) 
+VALUES (#{items_id},#{itemsname},#{description},#{category},#{items_lb},#{price},#{current_price},#{image},#{inventory},#{sales_volume},#{area},#{express_fee});
 </insert>
 
 <select id="findItemsByItemsId" parameterType="String" resultType="Items">
