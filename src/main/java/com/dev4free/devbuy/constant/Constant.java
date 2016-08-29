@@ -19,7 +19,7 @@ public class Constant {
 	/**
 	 * 图片实际存放路径
 	 */
-	public static final String IMAGE_ROOT_REAL_PATH= "/user/local/images/" ;
+	public static final String IMAGE_ROOT_REAL_PATH= "/usr/local/images/" ;
 	
 	
 	/**
