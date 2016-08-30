@@ -38,6 +38,14 @@ public class Constant {
 	public static final String IMAGE_ITEMS = "itemsPicture/";
 	
 	/**
+	 * 存放banner图片
+	 */
+	public static final String IMAGE_BANNER = "bannerPicture/";
+	
+	
+	
+	
+	/**
 	 * 定义订单状态
 	 */
 	public static final String ORDERS_STATE_WAIT_FOR_PAYMENT = "0";   //待支付
@@ -51,4 +59,11 @@ public class Constant {
 	 * 定义ConstantInfo常量名称
 	 */
 	public static final String CONSTANT_INFO_NAME_ABOUTUS = "关于我们";
+	
+	
+	/**
+	 * 定义推荐项目图片大小
+	 */
+	public static final String RECOMMEND_PICTURE_SIZE_LARGE = "0";
+	public static final String RECMMEND_PICTURE_SIZE_SMALL = "1";
 }

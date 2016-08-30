@@ -216,6 +216,7 @@ public class OrdersController {
 			responseMessage.setContent(ConstantResponse.CONTENT_PARAMETER_EMPTY);
 			return responseMessage;
 		}
+		
 		if(!customObjectUtils.isOrdersStateRight(state)){
 			responseMessage.setCode(ConstantResponse.CODE_ORDERS_STATE_ERROR);
 			responseMessage.setContent(ConstantResponse.CONTENT_ORDERS_STATE_ERROR);
