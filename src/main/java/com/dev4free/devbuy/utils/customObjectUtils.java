@@ -79,4 +79,23 @@ public class customObjectUtils {
 		}
 		return flag;
 	}
+	
+	/**
+	 * 判断订单状态是否合法
+	 * @param state
+	 * @return
+	 */
+	public static boolean isOrdersStateRight(String state){
+		
+		boolean flag = false;
+		if(state.equals(Constant.ORDERS_STATE_WAIT_FOR_PAYMENT)
+				||state.equals(Constant.ORDERS_STATE_WAIT_FOR_SHIPMENT)
+				||state.equals(Constant.ORDERS_STATE_WAIT_FOR_RECEIVING)
+				||state.equals(Constant.ORDERS_STATE_COMPLETED)
+				||state.equals(Constant.ORDERS_STATE_CANCELED)
+				||state.equals(Constant.ORDERS_STATE_ALL)){
+			flag = true;
+		}
+		return flag;
+	}
 }

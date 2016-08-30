@@ -211,9 +211,14 @@ public class OrdersController {
 		ResponseMessage responseMessage = new ResponseMessage();
 		
 		//对传入的参数进行校验
-		if(TextUtils.isEmpty(username)){
+		if(TextUtils.isEmpty(username)||TextUtils.isEmpty(state)){
 			responseMessage.setCode(ConstantResponse.CODE_PARAMETER_EMPTY);
 			responseMessage.setContent(ConstantResponse.CONTENT_PARAMETER_EMPTY);
+			return responseMessage;
+		}
+		if(!customObjectUtils.isOrdersStateRight(state)){
+			responseMessage.setCode(ConstantResponse.CODE_ORDERS_STATE_ERROR);
+			responseMessage.setContent(ConstantResponse.CONTENT_ORDERS_STATE_ERROR);
 			return responseMessage;
 		}
 		
@@ -230,9 +235,8 @@ public class OrdersController {
 		//根据user_id和state查询订单
 		Orders orders = new Orders();
 		orders.setUser_id(user_id);
-		if(!TextUtils.isEmpty(state)){
-			orders.setState(state);
-		}
+		orders.setState(state);
+
 				
 		ArrayList<OrdersCustom> ordersCustoms = ordersService.findOrdersByUserName(orders);
 		

@@ -10,7 +10,7 @@
     		<h2>对于items表单的数据更新</h2>	
     		
 		<form id="itemForm"
-		action="http://localhost:8080/devbuy/java/updateItemsByItemsId.action"
+		action="http://www.dev4free.com/devbuy/java/updateItemsByItemsId.action"
 		method="post" enctype="multipart/form-data">
 			<tr>
 				<td>商品的id</td>
