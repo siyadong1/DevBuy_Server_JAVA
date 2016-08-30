@@ -70,19 +70,30 @@ WHERE orders.orders_id=#{orders_id} AND orderdetail.orders_id=orders.orders_id
 
 <resultMap type="OrdersCustom" id="OrdersAndOrderDetailResultMap">
 	<id column="orders_id" property="orders_id"/>
+	<result column="user_id" property="user_id"/>
+	<result column="address_id" property="address_id"/>
 	<result column="create_time" property="create_time"/>
 	<result column="sum" property="sum"/>
 	<result column="state" property="state"/>
 	
 	<collection property="orderDetailCustom" ofType="OrderDetailCustom">
-		<id column="items_id" property="items_id"/>
+		<id column="details_id" property="details_id"/>
+		<result column="orders_id" property="orders_id"/>
+		<result column="items_id" property="items_id"/>
 		<result column="items_num" property="items_num"/>
 		<association property="items" javaType="Items">
 			<id column="items_id" property="items_id"/>
 			<result column="itemsname" property="itemsname"/>
 			<result column="description" property="description"/>
+			<result column="category" property="category"/>
+			<result column="items_lb" property="items_lb"/>
 			<result column="price" property="price"/>
+			<result column="current_price" property="current_price"/>
 			<result column="image" property="image"/>
+			<result column="inventory" property="inventory"/>
+			<result column="sales_volume" property="sales_volume"/>
+			<result column="area" property="area"/>
+			<result column="express_fee" property="express_fee"/>
 		</association>
 	</collection>
 </resultMap>
@@ -91,15 +102,27 @@ WHERE orders.orders_id=#{orders_id} AND orderdetail.orders_id=orders.orders_id
 <select id="findOrdersByUserName" parameterType="Orders" resultMap="OrdersAndOrderDetailResultMap">
 SELECT 
 orders.orders_id,
+orders.user_id,
+orders.address_id,
 orders.create_time,
 orders.sum,
 orders.state,
+orderdetail.details_id,
+orderdetail.orders_id,
 orderdetail.items_id,
 orderdetail.items_num,
+items.items_id,
 items.itemsname,
 items.description,
+items.category,
+items.items_lb,
 items.price,
-items.image 
+items.current_price,
+items.image,
+items.inventory,
+items.sales_volume;
+items.area,
+items.express_fee 
 FROM orders,orderdetail,items
 <where>
 	<include refid="query_orders_by_user_id"></include>

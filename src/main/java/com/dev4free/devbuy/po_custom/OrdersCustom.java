@@ -15,7 +15,7 @@ public class OrdersCustom extends Orders{
 //	//Orders类的属性
 //	private String orders_id;
 //	private String user_id;
-//	private String address;
+//	private String address_id;
 //	private String create_time;
 //	private String sum;
 //	private String state;

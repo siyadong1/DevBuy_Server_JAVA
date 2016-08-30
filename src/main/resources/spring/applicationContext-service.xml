@@ -41,4 +41,14 @@
 <bean id="ConstantInfoService" class="com.dev4free.devbuy.serviceImp.ConstantInfoServiceImpl">
 </bean>
 
+<bean id="BannerService" class="com.dev4free.devbuy.serviceImp.BannerServiceImpl">
+</bean>
+
+<bean id="ClassificationService" class="com.dev4free.devbuy.serviceImp.ClassificationServiceImpl">
+</bean>
+
+<bean id="RecommendService" class="com.dev4free.devbuy.serviceImp.RecommendServiceImpl">
+</bean>
+
+
 </beans>
