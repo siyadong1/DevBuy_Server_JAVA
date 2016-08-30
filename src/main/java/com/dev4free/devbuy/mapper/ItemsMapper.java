@@ -1,5 +1,7 @@
 package com.dev4free.devbuy.mapper;
 
+import java.util.ArrayList;
+
 import com.dev4free.devbuy.po.Items;
 
 public interface ItemsMapper {
@@ -23,4 +25,11 @@ public interface ItemsMapper {
 	 * @param items
 	 */
 	public void updateItemsByItemsId(Items items);
+	
+	/**
+	 * 根据商品类别查询商品信息
+	 * @param category
+	 * @return
+	 */
+	public ArrayList<Items> findItemsByCategory(String category);
 }

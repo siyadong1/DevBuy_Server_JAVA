@@ -13,6 +13,12 @@ VALUES (#{items_id},#{itemsname},#{description},#{category},#{items_lb},#{price}
 SELECT * FROM items WHERE items_id=#{items_id};
 </select>
 
+<select id="findItemsByCategory" parameterType="String" resultType="Items">
+SELECT * FROM items WHERE category=#{category};
+</select>
+
+
+
 <update id="updateItemsByItemsId" parameterType="Items">
 UPDATE items 
 <set>

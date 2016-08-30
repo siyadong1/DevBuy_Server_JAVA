@@ -1,5 +1,7 @@
 package com.dev4free.devbuy.serviceImp;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.dev4free.devbuy.mapper.ItemsMapper;
@@ -42,4 +44,16 @@ public class ItemsServiceImpl implements ItemsService{
 		itemsMapper.updateItemsByItemsId(items);
 	}
 
+	
+	/**
+	 * 根据商品类别查询商品信息
+	 * @param category
+	 * @return
+	 */
+	public ArrayList<Items> findItemsByCategory(String category){
+		
+		ArrayList<Items> items = itemsMapper.findItemsByCategory(category);
+		return items;
+	}
+	
 }
