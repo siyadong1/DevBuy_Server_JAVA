@@ -120,10 +120,10 @@ items.price,
 items.current_price,
 items.image,
 items.inventory,
-items.sales_volume;
+items.sales_volume,
 items.area,
 items.express_fee 
-FROM orders,orderdetail,items
+FROM orders,orderdetail,items 
 <where>
 	<include refid="query_orders_by_user_id"></include>
 	<include refid="query_orders_by_state"></include>
