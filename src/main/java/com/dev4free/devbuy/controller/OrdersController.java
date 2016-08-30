@@ -235,8 +235,12 @@ public class OrdersController {
 		//根据user_id和state查询订单
 		Orders orders = new Orders();
 		orders.setUser_id(user_id);
-		orders.setState(state);
-
+		if(state==Constant.ORDERS_STATE_ALL){
+			orders.setState(null);
+		}
+		else{
+			orders.setState(state);
+		}
 				
 		ArrayList<OrdersCustom> ordersCustoms = ordersService.findOrdersByUserName(orders);
 		
