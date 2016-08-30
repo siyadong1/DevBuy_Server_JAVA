@@ -42,8 +42,15 @@ public class Constant {
 	 */
 	public static final String IMAGE_BANNER = "bannerPicture/";
 	
+	/**
+	 * 存放classification图片
+	 */
+	public static final String IMAGE_CLASSIFICATION = "classificationPicture/";
 	
-	
+	/**
+	 * 存放recommend图片
+	 */
+	public static final String IMAGE_RECOMMEND = "recommendPicture/";
 	
 	/**
 	 * 定义订单状态
