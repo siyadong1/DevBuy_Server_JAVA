@@ -236,7 +236,7 @@ public class OrdersController {
 		//根据user_id和state查询订单
 		Orders orders = new Orders();
 		orders.setUser_id(user_id);
-		if(state==Constant.ORDERS_STATE_ALL){
+		if(state.equals(Constant.ORDERS_STATE_ALL)){
 			orders.setState(null);
 		}
 		else{
