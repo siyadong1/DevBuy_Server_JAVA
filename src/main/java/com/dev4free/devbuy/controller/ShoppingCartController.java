@@ -1,6 +1,8 @@
 package com.dev4free.devbuy.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.dev4free.devbuy.constant.ConstantResponse;
 import com.dev4free.devbuy.entity.ResponseMessage;
 import com.dev4free.devbuy.po.Items;
 import com.dev4free.devbuy.po.ShoppingCartRecord;
 import com.dev4free.devbuy.po.User;
+import com.dev4free.devbuy.po_custom.ItemsIdAndNum;
 import com.dev4free.devbuy.po_custom.UserShoppingCart;
 import com.dev4free.devbuy.service.ItemsService;
 import com.dev4free.devbuy.service.ShoppingCartService;
@@ -183,12 +187,12 @@ public class ShoppingCartController {
 	 * @return
 	 */
 	@RequestMapping(value="/deleteItemsFromShoppingCart")
-	public @ResponseBody ResponseMessage deleteItemsFromShoppingCart(String username, String cart_id){
+	public @ResponseBody ResponseMessage deleteItemsFromShoppingCart(String username, String cart_ids){
 	
 		ResponseMessage responseMessage = new ResponseMessage();
 		
 		//对传入的参数进行校验
-		if(TextUtils.isEmpty(username)||TextUtils.isEmpty(cart_id)){
+		if(TextUtils.isEmpty(username)||TextUtils.isEmpty(cart_ids)){
 			responseMessage.setCode(ConstantResponse.CODE_PARAMETER_EMPTY);
 			responseMessage.setContent(ConstantResponse.CONTENT_PARAMETER_EMPTY);
 			return responseMessage;
@@ -202,20 +206,30 @@ public class ShoppingCartController {
 			return responseMessage;
 		}
 		
-		//查询是否有该记录
-		ShoppingCartRecord shoppingCartRecord = new ShoppingCartRecord();
-		shoppingCartRecord.setCart_id(cart_id);;
+		//从传入的json字符串中获取cart_ids属性项
+		List<String> cart_id = JSONObject.parseArray(cart_ids, String.class);
 
-		ShoppingCartRecord sCRecord = new ShoppingCartRecord(); //存放查询结果
-		sCRecord = shoppingCartService.findShoppingCartRecordByShoppingCartRecord(shoppingCartRecord);
-		if(sCRecord==null || !sCRecord.getUser_id().equals(user.getUser_id())){
-			responseMessage.setCode(ConstantResponse.CODE_SHOPPINGCARTRECORD_NOEXISTS);
-			responseMessage.setContent(ConstantResponse.CONTENT_SHOPPINGCARTRECORD_NOEXISTS);
-			return responseMessage;
+		Iterator<String> iterator = cart_id.iterator();
+		while(iterator.hasNext()){
+			
+			String temp_cart_id = iterator.next();
+			
+			//查询是否有该记录
+			ShoppingCartRecord shoppingCartRecord = new ShoppingCartRecord();
+			shoppingCartRecord.setCart_id(temp_cart_id);
+			
+			ShoppingCartRecord sCRecord = new ShoppingCartRecord(); //存放查询结果
+			sCRecord = shoppingCartService.findShoppingCartRecordByShoppingCartRecord(shoppingCartRecord);
+			
+			if(sCRecord==null || !sCRecord.getUser_id().equals(user.getUser_id())){
+				responseMessage.setCode(ConstantResponse.CODE_SHOPPINGCARTRECORD_NOEXISTS);
+				responseMessage.setContent(ConstantResponse.CONTENT_SHOPPINGCARTRECORD_NOEXISTS);
+				return responseMessage;
+			}
+			
+			shoppingCartService.deleteItemsFromShoppingCart(temp_cart_id);
 		}
-		
-		shoppingCartService.deleteItemsFromShoppingCart(cart_id);
-		
+
 		return responseMessage;
 		
 		

@@ -180,7 +180,6 @@ public class OrdersController {
 
 		}
 		
-		
 		//orders只记录一条记录，orderdetail记录商品id及商品详情
 		Orders orders = new Orders();
 		
@@ -192,10 +191,6 @@ public class OrdersController {
 		orders.setState(state);
 
 		ordersService.insertOrdersRecord(orders);
-		
-		
-		//提交订单成功后，删除购物车属于该订单的商品
-		
 		
 		responseMessage.setContent(JSON.toJSON(orders_id));
 		
