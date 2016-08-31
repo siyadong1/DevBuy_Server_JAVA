@@ -19,12 +19,10 @@ import com.dev4free.devbuy.constant.ConstantResponse;
 import com.dev4free.devbuy.entity.ResponseMessage;
 import com.dev4free.devbuy.po.Banner;
 import com.dev4free.devbuy.po.Classification;
-import com.dev4free.devbuy.po.Items;
 import com.dev4free.devbuy.po.Recommend;
 import com.dev4free.devbuy.po_custom.InitialPagesCustom;
 import com.dev4free.devbuy.service.BannerService;
 import com.dev4free.devbuy.service.ClassificationService;
-import com.dev4free.devbuy.service.ItemsService;
 import com.dev4free.devbuy.service.RecommendService;
 import com.dev4free.devbuy.utils.TextUtils;
 import com.dev4free.devbuy.utils.UUIDUtils;
@@ -42,62 +40,42 @@ public class InitialPagesController {
 	@Autowired
 	RecommendService recommendService;
 	
-	@Autowired
-	ItemsService itemsService;
 	
 	/**
 	 * APP初始化模块
 	 * @return
 	 */
-	@RequestMapping(value="/initialPages")
-	public @ResponseBody ResponseMessage initialPages(){
-
-		ResponseMessage responseMessage = new ResponseMessage();
-		
-		InitialPagesCustom initialPagesCustom= new InitialPagesCustom(); //返回对象
-		
-		//模块一：返回banner显示的图片及关联商品的id
-		
-		ArrayList<Banner> banner = bannerService.bannerQuery();
-		
-		
-		//模块二：返回导航分类图片及关联商品类别
-		
-		ArrayList<Classification> classification = classificationService.classificationQuery();
-		
-		
-		//模块三：返回推荐项目名称、显示图片及图片关联的商品id
-		
-		ArrayList<Recommend> recommend = recommendService.recommendQuery();
-		
-		initialPagesCustom.setBanner(banner);
-		initialPagesCustom.setClassification(classification);
-		initialPagesCustom.setRecommend(recommend);
-		
-		responseMessage.setContent(JSON.toJSON(initialPagesCustom));
-		
-		return responseMessage;
-	}
+//	@RequestMapping(value="/initialPages")
+//	public @ResponseBody ResponseMessage initialPages(){
+//
+//		ResponseMessage responseMessage = new ResponseMessage();
+//		
+//		InitialPagesCustom initialPagesCustom= new InitialPagesCustom(); //返回对象
+//		
+//		//模块一：返回banner显示的图片及关联商品的id
+//		
+//		ArrayList<Banner> banner = bannerService.bannerQuery();
+//		
+//		
+//		//模块二：返回导航分类图片及关联商品类别
+//		
+//		ArrayList<Classification> classification = classificationService.classificationQuery();
+//		
+//		
+//		//模块三：返回推荐项目名称、显示图片及图片关联的商品id
+//		
+//		ArrayList<Recommend> recommend = recommendService.recommendQuery();
+//		
+//		initialPagesCustom.setBanner(banner);
+//		initialPagesCustom.setClassification(classification);
+//		initialPagesCustom.setRecommend(recommend);
+//		
+//		responseMessage.setContent(JSON.toJSON(initialPagesCustom));
+//		
+//		return responseMessage;
+//	}
 	
 	
-	@RequestMapping(value="/queryItemsDetailByCategory")
-	public @ResponseBody ResponseMessage queryItemsDetailByCategory(String category){
-
-		ResponseMessage responseMessage = new ResponseMessage();
-		
-		if(TextUtils.isEmpty(category)){
-			responseMessage.setCode(ConstantResponse.CODE_PARAMETER_EMPTY);
-			responseMessage.setContent(ConstantResponse.CONTENT_PARAMETER_EMPTY);
-			return responseMessage;
-		}
-		
-		//根据商品类别查询商品详情
-		ArrayList<Items> items = itemsService.findItemsByCategory(category);
-		
-		responseMessage.setContent(JSON.toJSON(items));
-	
-		return responseMessage;
-	}	
 	
 	/**
 	 * 更新或插入banner图片信息
