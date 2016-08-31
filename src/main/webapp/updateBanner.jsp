@@ -10,7 +10,7 @@
     		<h2>对于banner表单的数据更新</h2>	
     		
 		<form id="itemForm"
-		action="http://localhost:8080/devbuy/java/updateBannerInfo.action"
+		action="http://www.dev4free.com/devbuy/java/updateBannerInfo.action"
 		method="post" enctype="multipart/form-data">
 			<tr>
 				<td>banner图片id</td>

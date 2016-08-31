@@ -73,4 +73,23 @@ public class Constant {
 	 */
 	public static final String RECOMMEND_PICTURE_SIZE_LARGE = "0";
 	public static final String RECMMEND_PICTURE_SIZE_SMALL = "1";
+	
+	/**
+	 * 定义商品类别
+	 */
+	public static final String ITEMS_CATEGORY_BOOK = "0";
+	public static final String ITEMS_CATEGORY_MOBILE_PHONE = "1";
+	public static final String ITEMS_CATEGORY_COMPUTER = "2";
+	public static final String ITEMS_CATEGORY_ELECTRIC_APPLIANCE = "3";
+	public static final String ITEMS_CATEGORY_MEN_CLOTHING = "4";
+	public static final String ITEMS_CATEGORY_WOMEN_CLOTHING = "5";
+	public static final String ITEMS_CATEGORY_COSMETIC = "6";
+	public static final String ITEMS_CATEGORY_SHOES = "7";
+	public static final String ITEMS_CATEGORY_PET = "8";
+	public static final String ITEMS_CATEGORY_FRUIT = "9";
+	public static final String ITEMS_CATEGORY_ALL = "10";
+	
+	
+	
+	
 }

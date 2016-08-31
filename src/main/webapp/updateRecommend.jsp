@@ -10,7 +10,7 @@
     		<h2>对于recommend表单的数据更新</h2>	
     		
 		<form id="itemForm"
-		action="http://localhost:8080/devbuy/java/updateRecommendInfo.action"
+		action="http://www.dev4free.com/devbuy/java/updateRecommendInfo.action"
 		method="post" enctype="multipart/form-data">
 			<tr>
 				<td>推荐项目图片id</td>

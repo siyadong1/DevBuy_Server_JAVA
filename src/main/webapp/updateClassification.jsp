@@ -10,7 +10,7 @@
     		<h2>对于classification表单的数据更新</h2>	
     		
 		<form id="itemForm"
-		action="http://localhost:8080/devbuy/java/updateClassificationInfo.action"
+		action="http://www.dev4free.com/devbuy/java/updateClassificationInfo.action"
 		method="post" enctype="multipart/form-data">
 			<tr>
 				<td>分类图的id</td>
