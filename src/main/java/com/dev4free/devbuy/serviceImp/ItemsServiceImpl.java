@@ -56,4 +56,13 @@ public class ItemsServiceImpl implements ItemsService{
 		return items;
 	}
 	
+	/**
+	 * 查询所有商品信息
+	 * @return
+	 */
+	public ArrayList<Items> findItems(){
+		ArrayList<Items> items = itemsMapper.findItems();
+		return items;
+	}
+	
 }

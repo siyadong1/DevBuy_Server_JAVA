@@ -31,4 +31,11 @@ public interface ItemsService {
 	 * @return
 	 */
 	public ArrayList<Items> findItemsByCategory(String category);
+	
+	/**
+	 * 查询所有商品信息
+	 * @return
+	 */
+	public ArrayList<Items> findItems();
+	
 }

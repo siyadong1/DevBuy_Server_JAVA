@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.dev4free.devbuy.constant.Constant;
 import com.dev4free.devbuy.constant.ConstantResponse;
 import com.dev4free.devbuy.entity.ResponseMessage;
 import com.dev4free.devbuy.po.Classification;
@@ -59,6 +60,12 @@ public class ClassificationController {
 		if(TextUtils.isEmpty(category)){
 			responseMessage.setCode(ConstantResponse.CODE_PARAMETER_EMPTY);
 			responseMessage.setContent(ConstantResponse.CONTENT_PARAMETER_EMPTY);
+			return responseMessage;
+		}
+		
+		if(category.equals(Constant.ITEMS_CATEGORY_ALL)){
+			ArrayList<Items> items = itemsService.findItems();
+			responseMessage.setContent(JSON.toJSON(items));
 			return responseMessage;
 		}
 		

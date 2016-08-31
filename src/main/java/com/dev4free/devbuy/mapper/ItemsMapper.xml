@@ -3,6 +3,11 @@
 
 <mapper namespace="com.dev4free.devbuy.mapper.ItemsMapper">
 
+<sql id="query_items_by_category">
+<if test="category!=null and category!=''">
+	and category = #{category}
+</if>
+</sql>
 
 <insert id="insertItems" parameterType="Items">
 INSERT INTO items(items_id,itemsname,description,category,items_lb,price,current_price,image,inventory,sales_volume,area,express_fee) 
@@ -14,7 +19,11 @@ SELECT * FROM items WHERE items_id=#{items_id};
 </select>
 
 <select id="findItemsByCategory" parameterType="String" resultType="Items">
-SELECT * FROM items WHERE category=#{category};
+SELECT * FROM items WHERE category = #{category}
+</select>
+
+<select id="findItems" resultType="Items">
+SELECT * FROM items
 </select>
 
 
@@ -27,6 +36,7 @@ UPDATE items
 <if test="category!=null and category!=''">category=#{category},</if>
 <if test="items_lb!=null and items_lb!=''">items_lb=#{items_lb},</if>
 <if test="price!=null and price!=''">price=#{price},</if>
+<if test="current_price!=null and current_price!=''">current_price=#{current_price},</if>
 <if test="image!=null and image!=''">image=#{image},</if>
 <if test="inventory!=null and inventory!=''">inventory=#{inventory},</if>
 <if test="sales_volume!=null and sales_volume!=''">sales_volume=#{sales_volume},</if>

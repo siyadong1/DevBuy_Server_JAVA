@@ -3,9 +3,14 @@
 
 <mapper namespace="com.dev4free.devbuy.mapper.RecommendMapper">
 
-<select id="recommendQuery" resultType="Recommend">
-SELECT * FROM recommend
+<select id="recommendQueryByRcCategory" parameterType="String" resultType="Recommend">
+SELECT * FROM recommend WHERE rc_category=#{rc_category}
 </select>
+
+<select id="recommendCategoryQuery" resultType="String">
+SELECT DISTINCT rc_category FROM recommend
+</select>
+
 
 <insert id="insertRecommendDetail" parameterType="Recommend">
 INSERT INTO recommend(rc_id,rc_category,rc_name,rc_url,rc_islarge,items_id) 

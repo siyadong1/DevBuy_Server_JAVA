@@ -193,6 +193,10 @@ public class OrdersController {
 
 		ordersService.insertOrdersRecord(orders);
 		
+		
+		//提交订单成功后，删除购物车属于该订单的商品
+		
+		
 		responseMessage.setContent(JSON.toJSON(orders_id));
 		
 		return responseMessage;
